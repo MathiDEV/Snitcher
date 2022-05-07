@@ -1,4 +1,4 @@
-const database = require('../config/database');
+const database = require('../../config/database');
 const web3 = require('web3');
 const ethUtil = require('ethereumjs-util');
 const recoverPersonnalSignature = require('eth-sig-util');
@@ -14,13 +14,13 @@ const check_user = (req, res) => {
         return res.status(400).json({ error: 'Please provide a valid ethereum address' });
 
     database.query('SELECT * FROM wallets WHERE wallet = ?', [address.toLowerCase()], (err, results) => {
-        if (err) throw err;
+        if (err) return console.log(err.message);
         if (results.length > 0)
-            return res.status(200).json({ nonce: results[0].nonce });
+            return res.status(200).json({ nonce: results[0].nonce, address: results[0].wallet});
         const nonce = Math.floor(Math.random() * 1000000).toString();
         database.query('INSERT INTO wallets (wallet, nonce) VALUES (?, ?)', [address.toLowerCase(), nonce], (err, results) => {
             if (err) throw err;
-            return res.status(200).json({ nonce: nonce });
+            return res.status(200).json({ nonce: nonce, address: address.toLowerCase() });
         });
     });
 }
@@ -51,12 +51,15 @@ const login = (req, res) => {
             if (recovered.toLowerCase() === address.toLowerCase()) {
                 const nonce = Math.floor(Math.random() * 1000000).toString();
                 database.query('UPDATE wallets SET nonce = ? WHERE wallet = ?', [nonce, address.toLowerCase()], (err, results) => {
-                    if (err) throw err;
+                    if (err) return false;
                     const token = jwt.sign({ address: address.toLowerCase() }, process.env.SECRET, { expiresIn: '1h' });
+                    console.log("salut");
                     return res.status(200).json({ token: token });
                 });
+                console.log("ntm");
                 return res.status(400).json({ error: "There was an error authenticating the user" });
             }
+            console.log(recovered.toLowerCase() + "\n" + address.toLowerCase());
             return res.status(400).json({ error: "The signature is not valid" });
         }
         return res.status(400).json({ error: 'Invalid signature' });
