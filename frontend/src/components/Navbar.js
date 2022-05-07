@@ -64,11 +64,32 @@ const MenuToggle = ({ toggle, isOpen }) => {
 
 const MenuLinks = ({ isOpen }) => {
     const [currentAccount, setCurrentAccount] = React.useState(null);
+
+    if (currentAccount !== null){
+        console.log("oui")
+        return (
+            <Box
+              display={{ base: isOpen ? "block" : "none", md: "block" }}
+              flexBasis={{ base: "100%", md: "auto" }}
+            >
+              <Stack
+                spacing={8}
+                align="center"
+                justify={["center", "space-between", "flex-end", "flex-end"]}
+                direction={["column", "row", "row", "row"]}
+                pt={[4, 4, 0, 0]}
+              >
+                {/* <MenuItem onClick={()=> console.log("oui")} isLast > */}
+                {/* </MenuItem> */}
+              </Stack>
+            </Box>
+          );
+    }
+    
     const isInstalled = async () => 
 {
     const { ethereum } = window;
 
-    
     if(!ethereum) {
         console.log(ethereum);
         alert("You might not have MetaMask ! Install it first");
@@ -88,7 +109,6 @@ const MenuLinks = ({ isOpen }) => {
       } else {
         console.log("No authorized account found");
       }
-      console.log("oui")
     return;
 }
   return (
