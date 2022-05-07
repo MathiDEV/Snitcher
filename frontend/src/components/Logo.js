@@ -1,12 +1,16 @@
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, Square } from "@chakra-ui/react";
+import logo from '../assets/icon.png'
 
 export default function Logo(props) {
   return (
     <Box {...props}>
-      <Text fontSize="lg" fontWeight="bold">
-        Snitcher
-      </Text>
+        <Flex align="center">
+            <img src={logo} alt="Logo of Snitcher" style={{"height":"50px"}}/>
+            <Text fontSize="2xl" fontWeight="bold" fontFamily="'Lato', sans-serif" ml="5">
+            Snitcher
+            </Text>
+        </Flex>
     </Box>
   );
 }

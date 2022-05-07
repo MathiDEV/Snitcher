@@ -13,7 +13,7 @@ const NavBar = (props) => {
     <NavBarContainer {...props}>
       <Logo
         w="100px"
-        color={["white", "white", "primary.500", "primary.500"]}
+        color={["white", "white", "white", "white"]}
       />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} />
@@ -78,10 +78,10 @@ const MenuLinks = ({ isOpen }) => {
           <Button
             size="sm"
             rounded="md"
-            color={["primary.500", "primary.500", "white", "white"]}
-            bg={["white", "white", "primary.500", "primary.500"]}
+            color={["black", "white", "black", "black"]}
+            bg={["white", "white", "white", "white"]}
             _hover={{
-              bg: ["primary.100", "primary.100", "primary.600", "primary.600"]
+              bg: ["#54a0ff", "#54a0ff", "#54a0ff", "#54a0ff"]
             }}
           >
             Connect with MetaMask
@@ -100,10 +100,10 @@ const NavBarContainer = ({ children, ...props }) => {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      mb={8}
+    //   mb={8}
       p={8}
-      bg={["primary.500", "primary.500", "transparent", "transparent"]}
-      color={["white", "white", "primary.700", "primary.700"]}
+      bg={["black", "black", "black", "black"]}
+      color={["white", "white", "black", "black"]}
       {...props}
     >
       {children}
