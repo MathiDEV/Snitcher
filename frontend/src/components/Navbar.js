@@ -74,7 +74,7 @@ const MenuLinks = ({ isOpen }) => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem to="/signup" isLast>
+        <MenuItem to="/connect" isLast >
           <Button
             size="sm"
             rounded="md"
