@@ -4,13 +4,13 @@ import { Link, Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
 
 import Logo from "./Logo";
 
-const NavBar = (props) => {
+const NavBar = ({background}) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <NavBarContainer {...props}>
+    <NavBarContainer background={background}>
       <Logo
         w="100px"
         color={["white", "white", "white", "white"]}
@@ -92,7 +92,7 @@ const MenuLinks = ({ isOpen }) => {
   );
 };
 
-const NavBarContainer = ({ children, ...props }) => {
+const NavBarContainer = ({ children,  background}) => {
   return (
     <Flex
       as="nav"
@@ -102,9 +102,8 @@ const NavBarContainer = ({ children, ...props }) => {
       w="100%"
     //   mb={8}
       p={8}
-      bg={["black", "black", "black", "black"]}
+      bg={background == "transparent" ? ["transparent", "transparent", "transparent", "transparent"] : ["black", "black", "black", "black"]}
       color={["white", "white", "black", "black"]}
-      {...props}
     >
       {children}
     </Flex>
