@@ -3,11 +3,14 @@ import React from "react";
 import { FiBookmark, FiCpu, FiX } from 'react-icons/fi'
 import { FaEthereum } from 'react-icons/fa'
 import WalletLogo from '../assets/wallet.png'
+import { ScaleLoader } from "react-spinners";
 
 export default function WalletResult({ data }) {
     console.log(data);
     if (!data) {
-        return (<p>Loading...</p>);
+        return (<Center py={6}>
+            <ScaleLoader color="#54a0ff" size={20} />
+        </Center>);
     }
     if (data.status) {
         let estimation;
@@ -66,12 +69,12 @@ export default function WalletResult({ data }) {
                                 <Td>Formatted</Td>
                                 <Td>{data.data.balance.formatted} {data.data.currencySymbol}</Td>
                             </Tr>
-                            { (estimation == undefined)
+                            {(estimation == undefined)
                                 ? (<></>)
                                 : (<Tr>
                                     <Td>Estimated</Td>
                                     <Td>${estimation}</Td>
-                                  </Tr>)
+                                </Tr>)
                             }
                         </Tbody>
                     </Table>
@@ -105,10 +108,10 @@ export default function WalletResult({ data }) {
                             '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
                         }
                         _hover={{
-                            bg: 'blue.500',
+                            bg: '#54a0ff',
                         }}
                         _focus={{
-                            bg: 'blue.500',
+                            bg: '#54a0ff',
                         }}>
                         <FiCpu style={{ "marginRight": 5 }} /> Automatize
                     </Button>
