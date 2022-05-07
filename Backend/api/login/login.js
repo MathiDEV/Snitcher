@@ -25,6 +25,14 @@ const check_user = (req, res) => {
     });
 }
 
+const create_token = (req, res, address, nonce) => {
+    database.execute('UPDATE wallets SET nonce = ? WHERE wallet = ?', [nonce, address.toLowerCase()], (err, results) => {
+        if (err) return false;
+        const token = jwt.sign({ address: address.toLowerCase() }, process.env.SECRET, { expiresIn: '1h' });
+        return res.status(200).json({ token: token });
+    });
+}
+
 const login = (req, res) => {
     const { address, signature } = req.body;
 
@@ -37,7 +45,7 @@ const login = (req, res) => {
     if (signature.length !== 132)
         return res.status(400).json({ error: 'Please provide a valid signature' });
 
-    database.query('SELECT * FROM wallets WHERE wallet = ?', [address], (err, results) => {
+    database.execute('SELECT * FROM wallets WHERE wallet = ?', [address], (err, results) => {
         if (err) throw err;
         if (results.length > 0) {
             const msg = `You are signing a random nonce in order to login to snitcher: ${results[0].nonce}`;
@@ -50,14 +58,7 @@ const login = (req, res) => {
 
             if (recovered.toLowerCase() === address.toLowerCase()) {
                 const nonce = Math.floor(Math.random() * 1000000).toString();
-                database.query('UPDATE wallets SET nonce = ? WHERE wallet = ?', [nonce, address.toLowerCase()], (err, results) => {
-                    if (err) return false;
-                    const token = jwt.sign({ address: address.toLowerCase() }, process.env.SECRET, { expiresIn: '1h' });
-                    console.log("salut");
-                    return res.status(200).json({ token: token });
-                });
-                console.log("ntm");
-                return res.status(400).json({ error: "There was an error authenticating the user" });
+                return create_token(req, res, address, nonce);
             }
             console.log(recovered.toLowerCase() + "\n" + address.toLowerCase());
             return res.status(400).json({ error: "The signature is not valid" });
