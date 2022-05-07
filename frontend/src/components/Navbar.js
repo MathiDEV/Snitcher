@@ -13,8 +13,7 @@ const NavBar = ({background}) => {
     const [Adress, setAdress] = React.useState("test");
     const toggle = () => setIsOpen(!isOpen);
     const [currentAccount, setCurrentAccount] = React.useState(localStorage.getItem("acessToken") ? localStorage.getItem("acessToken") : null);
-
-
+    
 
 
 const CloseIcon = () => (
@@ -158,7 +157,8 @@ const MenuLinks = ({ isOpen }) => {
           // Send signature to backend on the /auth route
           .then(handleAuthenticate)
           // Pass accessToken back to parent component (to save it in localStorage)
-          .then((resp) => {localStorage.setItem("acessToken", resp.token);})
+          .then((resp) => {localStorage.setItem("acessToken", resp.token);
+                          window.location.reload()})
           .catch((err) => {
             // window.alert(err);
           });
@@ -180,10 +180,22 @@ const MenuLinks = ({ isOpen }) => {
         pt={[4, 4, 0, 0]}
       >
         {/* <MenuItem onClick={()=> console.log("oui")} isLast > */}
-          <Button
+          {currentAccount ?<Button
+            onClick={ () => {
+              Disconnect();
+            }}
+            size="sm"
+            rounded="md"
+            color={["black", "white", "black", "black"]}
+            bg={["white", "white", "white", "white"]}
+            _hover={{
+              bg: ["#54a0ff", "#54a0ff", "#54a0ff", "#54a0ff"]
+            }}
+          >
+            Disconnect
+          </Button> : <Button
             onClick={ () => {
               IsInstalled();
-              window.location.reload();
             }}
             size="sm"
             rounded="md"
@@ -194,7 +206,7 @@ const MenuLinks = ({ isOpen }) => {
             }}
           >
             Connect with MetaMask
-          </Button>
+          </Button>}
         {/* </MenuItem> */}
       </Stack>
     </Box>
