@@ -84,7 +84,7 @@ const MenuLinks = ({ isOpen }) => {
           address,
           '' // MetaMask will ignore the password argument here
         );
-  
+
         return { address , signature };
       } catch (err) {
         throw new Error(
@@ -94,7 +94,7 @@ const MenuLinks = ({ isOpen }) => {
       // setCurrentAccount("oui");
     }
 
-    const handleAuthenticate = ({address, signature}) => 
+    const handleAuthenticate = ({address, signature}) =>
     fetch(`http://192.168.1.13:3000/api/auth`, {
 			body: JSON.stringify({ address, signature }),
 			headers: {
@@ -103,7 +103,7 @@ const MenuLinks = ({ isOpen }) => {
 			method: 'POST',
 		}).then((response) => response.json());
 
-    const IsInstalled = async () => 
+    const IsInstalled = async () =>
     {
 
     if(!ethereum) {
@@ -113,7 +113,7 @@ const MenuLinks = ({ isOpen }) => {
     }else{
         // alert("MetaMask existe !");
     }
-    
+
     if (!web3) {
       try {
 
@@ -162,8 +162,10 @@ const MenuLinks = ({ isOpen }) => {
           .catch((err) => {
             // window.alert(err);
           });
-		}    
-
+		}
+    const Disconnect = () => {
+      localStorage.removeItem("accessToken");
+    }
 
     return;
 }
