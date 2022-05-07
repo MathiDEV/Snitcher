@@ -31,11 +31,12 @@ const CloseIcon = () => (
   </svg>
 );
 
-const isConnected = () => 
+const isConnected = async () => 
 {
-    const { etherum } = window;
+    const { ethereum } = window;
 
-    if(!etherum) {
+    if(!ethereum) {
+        console.log(etherum);
         alert("You might not have MetaMask ! Install it first");
         return;
     }else{
