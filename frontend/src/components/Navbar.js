@@ -5,8 +5,7 @@ import Logo from "./Logo";
 
 const NavBar = ({background}) => {
     const [isOpen, setIsOpen] = React.useState(false);
-
-
+    
     const toggle = () => setIsOpen(!isOpen);
 
     return (
@@ -31,19 +30,7 @@ const CloseIcon = () => (
   </svg>
 );
 
-const isConnected = async () => 
-{
-    const { ethereum } = window;
 
-    if(!ethereum) {
-        console.log(etherum);
-        alert("You might not have MetaMask ! Install it first");
-        return;
-    }else{
-        alert("MetaMask existe !");
-    }
-    return;
-}
 
 const MenuIcon = () => (
   <svg
@@ -76,6 +63,31 @@ const MenuToggle = ({ toggle, isOpen }) => {
 // };
 
 const MenuLinks = ({ isOpen }) => {
+    const [currentAccount, setCurrentAccount] = React.useState(null);
+    const isInstalled = async () => 
+{
+    const { ethereum } = window;
+
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+
+    if(!ethereum) {
+        console.log(ethereum);
+        alert("You might not have MetaMask ! Install it first");
+        return;
+    }else{
+        alert("MetaMask existe !");
+    }
+
+    if (accounts.length !== 0) {
+        const account = accounts[0];
+        console.log("Found an authorized account: ", account);
+        setCurrentAccount(account);
+      } else {
+        console.log("No authorized account found");
+      }
+      console.log("oui")
+    return;
+}
   return (
     <Box
       display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -90,7 +102,7 @@ const MenuLinks = ({ isOpen }) => {
       >
         {/* <MenuItem onClick={()=> console.log("oui")} isLast > */}
           <Button
-            onClick={() => isConnected()}
+            onClick={() => isInstalled()}
             size="sm"
             rounded="md"
             color={["black", "white", "black", "black"]}
