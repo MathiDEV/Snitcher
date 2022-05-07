@@ -2,44 +2,41 @@ import React from 'react'
 import {
     Flex,
     Text,
-    Icon,
     Link,
+    Icon,
     Menu,
-    MenuButton,
-    MenuList
+    MenuButton
 } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
-export default function NavItem({ icon, title, description, active, navSize }) {
+
+export default function NavItem({ icon, title, active, navSize, href }) {
+    const history = useNavigate();
+
     return (
         <Flex
-            mt={30}
+            mt={5}
             flexDir="column"
             w="100%"
             alignItems={navSize == "small" ? "center" : "flex-start"}
         >
             <Menu placement="right">
                 <Link
-                    backgroundColor={active && "#AEC8CA"}
+                    backgroundColor={active && "#54a0ff"}
                     p={3}
                     borderRadius={8}
-                    _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
+                    color={active && "#fff"}
+                    _hover={{ textDecor: 'none', backgroundColor: (active ? "#54a0ff" : "#e2e8f0") }}
                     w={navSize == "large" && "100%"}
+                    onClick={() => history(href)}
                 >
                     <MenuButton w="100%">
                         <Flex>
-                            <Icon as={icon} fontSize="xl" color={active ? "#82AAAD" : "gray.500"} />
+                            <Icon as={icon} fontSize="xl" />
                             <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
                         </Flex>
                     </MenuButton>
                 </Link>
-                <MenuList
-                    py={0}
-                    border="none"
-                    w={200}
-                    h={200}
-                    ml={5}
-                >
-                </MenuList>
             </Menu>
         </Flex>
     )
