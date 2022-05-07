@@ -68,8 +68,7 @@ const MenuLinks = ({ isOpen }) => {
 {
     const { ethereum } = window;
 
-    const accounts = await ethereum.request({ method: 'eth_accounts' });
-
+    
     if(!ethereum) {
         console.log(ethereum);
         alert("You might not have MetaMask ! Install it first");
@@ -77,6 +76,10 @@ const MenuLinks = ({ isOpen }) => {
     }else{
         alert("MetaMask existe !");
     }
+    
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+    console.log(accounts);
 
     if (accounts.length !== 0) {
         const account = accounts[0];
