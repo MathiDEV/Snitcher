@@ -7,6 +7,8 @@ import Sidebar from "../components/Sidebar";
 import DashboardContent from "../dashboard/Dashboard";
 import Search from "../dashboard/Search";
 import { Flex, Box } from "@chakra-ui/react";
+import { Navigate } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 function Dashboard() {
     var { id } = useParams();
@@ -28,6 +30,10 @@ function Dashboard() {
                 localStorage.setItem('ethvalue', data.ethereum.usd)
             })
         })
+    }
+
+    if (!localStorage.getItem("acessToken")){
+        return <Navigate to="/" />
     }
 
     return (

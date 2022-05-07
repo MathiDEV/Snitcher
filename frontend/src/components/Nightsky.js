@@ -150,8 +150,8 @@ export default function Nightsky(props) {
                 y: height / 2
             }
 
-            canva.setAttribute('width', width);
-            canva.setAttribute('height', height);
+            canva.setAttribute('width', window.innerWidth);
+            canva.setAttribute('height', window.innerHeight);
         }
     });
 

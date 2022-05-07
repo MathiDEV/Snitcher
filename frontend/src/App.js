@@ -1,6 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Route, Routes} from "react-router-dom";
 import './App.css';
+import "./polyfill.js";
 import Dashboard from "./pages/Dashboard";
 import Home from './pages/Home';
 

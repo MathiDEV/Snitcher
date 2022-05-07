@@ -5,7 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from "@chakra-ui/react";
 import customTheme from "./utils/theme";
+// console.log("oui")
+// import { Buffer } from 'buffer';
 
+// console.log("oui")
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
