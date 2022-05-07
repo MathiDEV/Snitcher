@@ -1,24 +1,23 @@
 
 import React from "react";
 import { Link, Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
-
 import Logo from "./Logo";
 
 const NavBar = ({background}) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
+    
+    const toggle = () => setIsOpen(!isOpen);
 
-  const toggle = () => setIsOpen(!isOpen);
-
-  return (
-    <NavBarContainer background={background}>
-      <Logo
-        w="100px"
-        color={["white", "white", "white", "white"]}
-      />
-      <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} />
-    </NavBarContainer>
-  );
+    return (
+      <NavBarContainer background={background}>
+        <Logo
+          w="100px"
+          color={["white", "white", "white", "white"]}
+        />
+        <MenuToggle toggle={toggle} isOpen={isOpen} />
+        <MenuLinks isOpen={isOpen} />
+      </NavBarContainer>
+    );
 };
 
 const CloseIcon = () => (
@@ -30,6 +29,8 @@ const CloseIcon = () => (
     />
   </svg>
 );
+
+
 
 const MenuIcon = () => (
   <svg
@@ -51,17 +52,45 @@ const MenuToggle = ({ toggle, isOpen }) => {
   );
 };
 
-const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
-  return (
-    <Link href={to}>
-      <Text display="block" {...rest}>
-        {children}
-      </Text>
-    </Link>
-  );
-};
+// const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
+//   return (
+//     <Link href={to}>
+//       <Text display="block" {...rest}>
+//         {children}
+//       </Text>
+//     </Link>
+//   );
+// };
 
 const MenuLinks = ({ isOpen }) => {
+    const [currentAccount, setCurrentAccount] = React.useState(null);
+    const isInstalled = async () => 
+{
+    const { ethereum } = window;
+
+    
+    if(!ethereum) {
+        console.log(ethereum);
+        alert("You might not have MetaMask ! Install it first");
+        return;
+    }else{
+        alert("MetaMask existe !");
+    }
+    
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+    console.log(accounts);
+
+    if (accounts.length !== 0) {
+        const account = accounts[0];
+        console.log("Found an authorized account: ", account);
+        setCurrentAccount(account);
+      } else {
+        console.log("No authorized account found");
+      }
+      console.log("oui")
+    return;
+}
   return (
     <Box
       display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -74,8 +103,9 @@ const MenuLinks = ({ isOpen }) => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem to="/signup" isLast>
+        {/* <MenuItem onClick={()=> console.log("oui")} isLast > */}
           <Button
+            onClick={() => isInstalled()}
             size="sm"
             rounded="md"
             color={["black", "white", "black", "black"]}
@@ -86,7 +116,7 @@ const MenuLinks = ({ isOpen }) => {
           >
             Connect with MetaMask
           </Button>
-        </MenuItem>
+        {/* </MenuItem> */}
       </Stack>
     </Box>
   );
