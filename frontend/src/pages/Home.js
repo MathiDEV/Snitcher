@@ -8,7 +8,7 @@ function Home() {
     const navigate = useNavigate();
     const [token, setToken] = useState(localStorage.getItem("accessToken") ? localStorage.getItem("accessToken") : null);
 
-    if (localStorage.getItem("acessToken")){
+    if (localStorage.getItem("accessToken")){
         return <Navigate to="/dashboard" />
         setToken(localStorage.getItem("acessToken"));
     }

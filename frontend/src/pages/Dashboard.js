@@ -10,13 +10,15 @@ import { Flex, Box } from "@chakra-ui/react";
 import { Navigate } from "react-router-dom";
 import { Route } from "react-router-dom";
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 032cf43519c079c8ec33ca538b558df5a6375ef0
 function Dashboard() {
     var { id } = useParams();
     var page, page_name;
+
+    if (!localStorage.getItem("accessToken")){
+        return <Navigate to="/" />
+    }
+
     switch (id) {
         case 'search':
             page = <Search />;
@@ -39,13 +41,6 @@ function Dashboard() {
 
 
     return (
-<<<<<<< HEAD
-            <>
-                <Navbar />
-                <Sidebar />
-            </>
-
-=======
         <>
             <Navbar />
             <Flex>
@@ -54,7 +49,6 @@ function Dashboard() {
                 {page}
             </Flex>
         </>
->>>>>>> 032cf43519c079c8ec33ca538b558df5a6375ef0
     )
 }
 

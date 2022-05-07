@@ -12,8 +12,8 @@ const NavBar = ({background}) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [Adress, setAdress] = React.useState("test");
     const toggle = () => setIsOpen(!isOpen);
-    const [currentAccount, setCurrentAccount] = React.useState(localStorage.getItem("acessToken") ? localStorage.getItem("acessToken") : null);
-    
+    const [currentAccount, setCurrentAccount] = React.useState(localStorage.getItem("accessToken") ? localStorage.getItem("accessToken") : null);
+
 
 
 const CloseIcon = () => (
@@ -55,25 +55,25 @@ const MenuLinks = ({ isOpen }) => {
 
     // console.log(currentAccount, "oui");
     // React.useEffect()
-    if (currentAccount !== null){
-        return (
-            <Box
-              display={{ base: isOpen ? "block" : "none", md: "block" }}
-              flexBasis={{ base: "100%", md: "auto" }}
-            >
-              <Stack
-                spacing={8}
-                align="center"
-                justify={["center", "space-between", "flex-end", "flex-end"]}
-                direction={["column", "row", "row", "row"]}
-                pt={[4, 4, 0, 0]}
-              >
-                {/* <MenuItem onClick={()=> console.log("oui")} isLast > */}
-                {/* </MenuItem> */}
-              </Stack>
-            </Box>
-          );
-    }
+    // if (currentAccount !== null){
+    //     return (
+    //         <Box
+    //           display={{ base: isOpen ? "block" : "none", md: "block" }}
+    //           flexBasis={{ base: "100%", md: "auto" }}
+    //         >
+    //           <Stack
+    //             spacing={8}
+    //             align="center"
+    //             justify={["center", "space-between", "flex-end", "flex-end"]}
+    //             direction={["column", "row", "row", "row"]}
+    //             pt={[4, 4, 0, 0]}
+    //           >
+    //             {/* <MenuItem onClick={()=> console.log("oui")} isLast > */}
+    //             {/* </MenuItem> */}
+    //           </Stack>
+    //         </Box>
+    //       );
+    // }
     const handleSignMessage = async (data) =>
     {
       // console.log(data, "je suis ici");
@@ -125,12 +125,14 @@ const MenuLinks = ({ isOpen }) => {
 
 			} catch (error) {
 				window.alert('You need to allow MetaMask.');
+        web3 = undefined;
 				return;
 			}
       const coinbase = await web3.eth.getCoinbase();
       // console.log(coinbase);
 
       if (!coinbase) {
+        web3 = undefined;
         // window.alert('Please activate MetaMask first.');
         return;
       }
@@ -157,17 +159,20 @@ const MenuLinks = ({ isOpen }) => {
           // Send signature to backend on the /auth route
           .then(handleAuthenticate)
           // Pass accessToken back to parent component (to save it in localStorage)
-          .then((resp) => {localStorage.setItem("acessToken", resp.token);
+          .then((resp) => {localStorage.setItem("accessToken", resp.token);
                           window.location.reload()})
           .catch((err) => {
-            // window.alert(err);
+            web3 = undefined;
+            console.log(err);
           });
 		}
-    const Disconnect = () => {
-      localStorage.removeItem("accessToken");
-    }
 
     return;
+}
+const Disconnect = () => {
+  localStorage.removeItem("accessToken");
+  window.location.reload();
+  console.log("oui")
 }
   return (
     <Box
@@ -182,7 +187,7 @@ const MenuLinks = ({ isOpen }) => {
         pt={[4, 4, 0, 0]}
       >
         {/* <MenuItem onClick={()=> console.log("oui")} isLast > */}
-          {currentAccount ?<Button
+          {currentAccount ? (<Button
             onClick={ () => {
               Disconnect();
             }}
@@ -195,7 +200,7 @@ const MenuLinks = ({ isOpen }) => {
             }}
           >
             Disconnect
-          </Button> : <Button
+          </Button>) : (<Button
             onClick={ () => {
               IsInstalled();
             }}
@@ -208,7 +213,7 @@ const MenuLinks = ({ isOpen }) => {
             }}
           >
             Connect with MetaMask
-          </Button>}
+          </Button> )}
         {/* </MenuItem> */}
       </Stack>
     </Box>
