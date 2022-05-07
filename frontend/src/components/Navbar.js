@@ -2,23 +2,20 @@
 import React from "react";
 import { Link, Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
 import Logo from "./Logo";
+import Web3 from "web3";
+import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { IoLogoWindows } from "react-icons/io5";
 
 const NavBar = ({background}) => {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = React.useState(false);
-    
+    const [Adress, setAdress] = React.useState("test");
     const toggle = () => setIsOpen(!isOpen);
+    const [currentAccount, setCurrentAccount] = React.useState(localStorage.getItem("acessToken") ? localStorage.getItem("acessToken") : null);
 
-    return (
-      <NavBarContainer background={background}>
-        <Logo
-          w="100px"
-          color={["white", "white", "white", "white"]}
-        />
-        <MenuToggle toggle={toggle} isOpen={isOpen} />
-        <MenuLinks isOpen={isOpen} />
-      </NavBarContainer>
-    );
-};
+
+
 
 const CloseIcon = () => (
   <svg width="24" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
@@ -52,21 +49,14 @@ const MenuToggle = ({ toggle, isOpen }) => {
   );
 };
 
-// const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
-//   return (
-//     <Link href={to}>
-//       <Text display="block" {...rest}>
-//         {children}
-//       </Text>
-//     </Link>
-//   );
-// };
+let web3 = undefined;
 
 const MenuLinks = ({ isOpen }) => {
-    const [currentAccount, setCurrentAccount] = React.useState(null);
+    const { ethereum } = window;
 
+    // console.log(currentAccount, "oui");
+    // React.useEffect()
     if (currentAccount !== null){
-        console.log("oui")
         return (
             <Box
               display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -85,30 +75,96 @@ const MenuLinks = ({ isOpen }) => {
             </Box>
           );
     }
-    
-    const isInstalled = async () => 
-{
-    const { ethereum } = window;
+    const handleSignMessage = async (data) =>
+    {
+      // console.log(data, "je suis ici");
+      try {
+        const address = data.address;
+        const signature = await web3.eth.personal.sign(
+          `You are signing a random nonce in order to login to snitcher: ${data.nonce}`,
+          address,
+          '' // MetaMask will ignore the password argument here
+        );
+  
+        return { address , signature };
+      } catch (err) {
+        throw new Error(
+          'You need to sign the message to be able to log in.'
+        );
+      }
+      // setCurrentAccount("oui");
+    }
+
+    const handleAuthenticate = ({address, signature}) => 
+    fetch(`http://192.168.1.13:3000/api/auth`, {
+			body: JSON.stringify({ address, signature }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			method: 'POST',
+		}).then((response) => response.json());
+
+    const IsInstalled = async () => 
+    {
 
     if(!ethereum) {
-        console.log(ethereum);
-        alert("You might not have MetaMask ! Install it first");
+        // console.log(ethereum);
+        // alert("You might not have MetaMask ! Install it first");
         return;
     }else{
-        alert("MetaMask existe !");
+        // alert("MetaMask existe !");
     }
     
-    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    if (!web3) {
+      try {
 
-    console.log(accounts);
+        await ethereum.request({ method: 'eth_requestAccounts' });
 
-    if (accounts.length !== 0) {
-        const account = accounts[0];
-        console.log("Found an authorized account: ", account);
-        setCurrentAccount(account);
-      } else {
-        console.log("No authorized account found");
+
+				web3 = new Web3(window.ethereum);
+        // console.log(web3);
+
+			} catch (error) {
+				window.alert('You need to allow MetaMask.');
+				return;
+			}
+      const coinbase = await web3.eth.getCoinbase();
+      // console.log(coinbase);
+
+      if (!coinbase) {
+        // window.alert('Please activate MetaMask first.');
+        return;
       }
+
+      const publicAddress = coinbase.toLowerCase();
+      // setCurrentAccount(publicAddress);
+      // console.log(currentAccount, "wsh la zone !");
+        fetch(
+          "http://192.168.1.13:3000/api/user", {
+            body: JSON.stringify({"address" : publicAddress}),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',}
+        )
+          .then((response) => response.json())
+          // If yes, retrieve it. If no, create it.
+          .then((users) =>
+            // console.log(users.nonce)
+            users
+          )
+          // Popup MetaMask confirmation modal to sign message
+          .then(handleSignMessage)
+          // Send signature to backend on the /auth route
+          .then(handleAuthenticate)
+          // Pass accessToken back to parent component (to save it in localStorage)
+          .then((resp) => {localStorage.setItem("acessToken", resp.token);})
+          .catch((err) => {
+            // window.alert(err);
+          });
+		}    
+
+
     return;
 }
   return (
@@ -125,7 +181,10 @@ const MenuLinks = ({ isOpen }) => {
       >
         {/* <MenuItem onClick={()=> console.log("oui")} isLast > */}
           <Button
-            onClick={() => isInstalled()}
+            onClick={ () => {
+              IsInstalled();
+              window.location.reload();
+            }}
             size="sm"
             rounded="md"
             color={["black", "white", "black", "black"]}
@@ -158,6 +217,17 @@ const NavBarContainer = ({ children,  background}) => {
       {children}
     </Flex>
   );
+  
 };
-
+return (
+  <NavBarContainer background={background}>
+    <Logo
+      w="100px"
+      color={["white", "white", "white", "white"]}
+    />
+    <MenuToggle toggle={toggle} isOpen={isOpen} />
+    <MenuLinks isOpen={isOpen} />
+  </NavBarContainer>
+);
+};
 export default NavBar;
