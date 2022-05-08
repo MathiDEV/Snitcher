@@ -34,7 +34,7 @@ export default function Applets()
     const [accounts, setAccounts] = useState(testAccounts);
 
 
-
+    console.log(accounts);
     return (
 <Stack  direction={'column'} 
         height="500px"

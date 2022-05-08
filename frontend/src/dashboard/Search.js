@@ -20,19 +20,14 @@ function Search(props = undefined) {
             return setSearch(undefined)
         // setSearch(null)
         if (url) url = undefined;
-        console.log("oui oui non non ")
         Starton.getWallet(wallet,
             function (error) {
-                console.log("oui mon sah")
                 setSearch({ status: false, error: error })
             },
             function (data) {
-                console.log("tout s'est bien passé")
                 setSearch({ status: true, data: data })
-                console.log(search)
             }
         )
-        console.log("finininini")
     }
 
     return (

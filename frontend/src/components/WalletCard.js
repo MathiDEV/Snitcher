@@ -1,4 +1,4 @@
-import React from "react";
+import {useState, useEffect} from "react";
 import { Box, Avatar, Text, Stack, Badge, Button, Flex, Td, Thead, Table, TableContainer, Tr, Th, Tbody } from "@chakra-ui/react";
 import { FiBookmark, FiCpu } from 'react-icons/fi'
 import { FaEthereum } from 'react-icons/fa'
@@ -11,6 +11,42 @@ export default function Logo({ data }) {
     let estimation;
     if (localStorage.getItem('ethvalue')) {
         estimation = (parseFloat(data.balance.formatted) * parseFloat(localStorage.getItem('ethvalue'))).toFixed(2);
+    }
+    const [accounts, setAccounts] = useState([])
+    useEffect(() => {
+        fetch ("http://192.168.1.13:3000/api/user/getAllSave",{
+            headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken")},
+        }).then((resp)=>resp.json())
+        .then((data) => setAccounts(data.success)).then((e) => localStorage.setItem("savedAddress", JSON.stringify(accounts)));
+    }, [])
+    console.log(accounts);
+    if (accounts) localStorage.setItem("savedAddress", JSON.stringify(accounts));
+
+    function check(address){
+        let array = JSON.parse(localStorage.getItem("savedAddress"));
+        console.log(array)
+        if (!array) return 0
+        let i = 0;
+        for(let  value of array){
+            console.log( value.save_addr);
+            if (address === value.save_addr){
+                return 1;
+            }
+            i++;
+        }
+        return 0
+    }
+
+    function addOrRemove(address)
+    {
+        fetch("http://192.168.1.13:3000/api/user/saveLater",
+        {
+            headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                    'Content-Type': 'application/json' },
+            body: JSON.stringify({"toSave" : address}),
+            method: "POST"
+        }).then((resp)=>(console.log(resp)))
+        navigate("/dashboard/search")
     }
     return (
         <Box
@@ -89,8 +125,11 @@ export default function Logo({ data }) {
                     rounded={'full'}
                     _focus={{
                         bg: 'gray.200',
-                    }}>
-                    <FiBookmark style={{ "marginRight": 5 }} /> Save for later
+                    }}
+                    onClick={() => { console.log("oui");addOrRemove(data.address); navigate("/dashboard/search")}}>
+                    <FiBookmark style={{ "marginRight": 5 }}/>
+                        { check(data.address) ? "Delete from saved" : "Save for later"
+                        }
                 </Button>
                 <Button
                     flex={1}
