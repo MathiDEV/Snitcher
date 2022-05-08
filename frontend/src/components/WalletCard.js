@@ -38,6 +38,7 @@ export default function Logo({ data }) {
                     pos: 'absolute',
                     bottom: 0,
                     right: 3,
+                    zIndex: 1,
                 }}
             />
             <Text fontWeight={600} color={'gray.500'} mb={4}>

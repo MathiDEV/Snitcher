@@ -9,6 +9,8 @@ function Search() {
     const [search, setSearch] = useState(undefined)
 
     function getWallet(wallet) {
+        if (wallet.length == 0)
+            return setSearch(undefined)
         setSearch(null)
         Starton.getWallet(wallet,
             function (error) {
