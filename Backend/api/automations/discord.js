@@ -1,4 +1,5 @@
 const { Webhook, MessageBuilder } = require('discord-webhook-node');
+const json = require("../json/json");
 
 const sendMessage = (url, from, to, amount, currency) => {
     const hook = new Webhook(url);
@@ -16,6 +17,19 @@ const sendMessage = (url, from, to, amount, currency) => {
     hook.send(embed);
 }
 
+const create_discord_json = (title, url, user_id) => {
+    return json.create_webhook_json(
+        title,
+        "discord",
+        {
+            url: url,
+        },
+        user_id
+    );
+}
+
+
 module.exports = {
-    sendMessage
+    sendMessage,
+    create_discord_json
 }

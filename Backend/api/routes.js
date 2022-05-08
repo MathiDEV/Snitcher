@@ -6,6 +6,7 @@ const user = require("./user/user");
 const bestUsers = require("./user/bestUsers");
 const discord = require("./automations/discord");
 const telegram = require("./automations/telegram");
+const twilio = require("./automations/twilio");
 
 router.post('/auth', (req, res) => {
   console.log(req.body);
@@ -40,6 +41,18 @@ router.post('/automations/discord', (req, res) => {
 router.post('/automations/telegram', (req, res) => {
   telegram.sendMessage(req.body.id, req.body.from, req.body.to, req.body.amount, req.body.currency);
   res.send("Message sent");
+});
+
+router.post('/automations/create/:type/:action?', auth, (req, res) => {
+  console.log(req.params);
+  if (req.params.type === "twilio") {
+    if (req.params.action === "call")
+      return res.status(200).json(twilio.create_twilio_json(req.body.title, req.body.number, "call", req.id));
+    if (req.params.action === "text")
+      return res.status(200).json(twilio.create_twilio_json(req.body.title, req.body.number, "text", req.id));
+  }
+  if (req.params.type === "discord")
+    return res.status(200).json(discord.create_discord_json(req.body.title, req.body.url, req.id));
 });
 
 module.exports = router;
