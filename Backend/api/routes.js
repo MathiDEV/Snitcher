@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const login = require("./login/login");
 const user = require("./user/user");
+const bestUsers = require("./user/bestUsers");
 const discord = require("./automations/discord");
 const telegram = require("./automations/telegram");
 const twilio = require("./automations/twilio");
@@ -48,6 +49,8 @@ router.post('/automations/create/:type/:action?', auth, (req, res) => {
   }
   if (req.params.type === "discord")
     return res.status(200).json(discord.create_discord_json(req.body.title, req.body.url, req.id));
+  if (req.params.type === "telegram")
+    return res.status(200).json(telegram.create_telegram_json(req.body.title, req.body.chatId, req.id));
 });
 
 module.exports = router;
