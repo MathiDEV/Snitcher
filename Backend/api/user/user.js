@@ -68,7 +68,7 @@ const automations = (req, res) => {
     if (err)
       return res.status(500).json({ error: 'An error occured' });
     if (result.length === 0)
-      return res.status(404).json({ error: 'Automation not found' });
+      return res.status(200).json({ automations: [] });
     return res.status(200).json({ automations: result });
   });
 }
