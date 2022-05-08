@@ -60,7 +60,6 @@ const login = (req, res) => {
                 const nonce = Math.floor(Math.random() * 1000000).toString();
                 return create_token(req, res, address, nonce, results[0].id);
             }
-            console.log(recovered.toLowerCase() + "\n" + address.toLowerCase());
             return res.status(400).json({ error: "The signature is not valid" });
         }
         return res.status(400).json({ error: 'Invalid signature' });

@@ -11,7 +11,7 @@ function Home() {
     const navigate = useNavigate();
     const [token, setToken] = useState(localStorage.getItem("accessToken") ? localStorage.getItem("accessToken") : null);
 
-    if (localStorage.getItem("accessToken")){
+    if (localStorage.getItem("accessToken")) {
         return <Navigate to="/dashboard" />
     }
     // if(token)
@@ -21,14 +21,14 @@ function Home() {
         <>
             <Nightsky />
             <div id="hero">
-            <Hero />
-            <div id="features">
-            <Feature/>
-            </div>
-            <div id="prices">
-            <Price id="prices"/>
-            </div>
-            <Footer />
+                <Hero />
+                <div id="features">
+                    <Feature />
+                </div>
+                <div id="prices">
+                    <Price id="prices" />
+                </div>
+                <Footer />
             </div>
         </>
     )

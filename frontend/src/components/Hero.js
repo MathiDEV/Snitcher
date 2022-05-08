@@ -79,7 +79,7 @@ import Arrow from "../assets/Background(1).png";
               src={
                 Iphone
               }
-              objectFit={'contain'}
+              objectFit={'cover'}
             />
           </Flex>
           </Flex>
