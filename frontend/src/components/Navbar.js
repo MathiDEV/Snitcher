@@ -8,9 +8,7 @@ import { Navigate } from "react-router-dom";
 import { IoLogoWindows } from "react-icons/io5";
 
 const NavBar = ({background}) => {
-    const navigate = useNavigate();
     const [isOpen, setIsOpen] = React.useState(false);
-    const [Adress, setAdress] = React.useState("test");
     const toggle = () => setIsOpen(!isOpen);
     const [currentAccount, setCurrentAccount] = React.useState(localStorage.getItem("accessToken") ? localStorage.getItem("accessToken") : null);
 
@@ -52,37 +50,14 @@ let web3 = undefined;
 
 const MenuLinks = ({ isOpen }) => {
     const { ethereum } = window;
-
-    // console.log(currentAccount, "oui");
-    // React.useEffect()
-    // if (currentAccount !== null){
-    //     return (
-    //         <Box
-    //           display={{ base: isOpen ? "block" : "none", md: "block" }}
-    //           flexBasis={{ base: "100%", md: "auto" }}
-    //         >
-    //           <Stack
-    //             spacing={8}
-    //             align="center"
-    //             justify={["center", "space-between", "flex-end", "flex-end"]}
-    //             direction={["column", "row", "row", "row"]}
-    //             pt={[4, 4, 0, 0]}
-    //           >
-    //             {/* <MenuItem onClick={()=> console.log("oui")} isLast > */}
-    //             {/* </MenuItem> */}
-    //           </Stack>
-    //         </Box>
-    //       );
-    // }
     const handleSignMessage = async (data) =>
     {
-      // console.log(data, "je suis ici");
       try {
         const address = data.address;
         const signature = await web3.eth.personal.sign(
           `You are signing a random nonce in order to login to snitcher: ${data.nonce}`,
           address,
-          '' // MetaMask will ignore the password argument here
+          ''
         );
 
         return { address , signature };
@@ -91,7 +66,6 @@ const MenuLinks = ({ isOpen }) => {
           'You need to sign the message to be able to log in.'
         );
       }
-      // setCurrentAccount("oui");
     }
 
     const handleAuthenticate = ({address, signature}) =>
@@ -107,11 +81,8 @@ const MenuLinks = ({ isOpen }) => {
     {
 
     if(!ethereum) {
-        // console.log(ethereum);
-        // alert("You might not have MetaMask ! Install it first");
+        // Ajouter une pop up qui demande d'installer Metamask
         return;
-    }else{
-        // alert("MetaMask existe !");
     }
 
     if (!web3) {
@@ -125,21 +96,19 @@ const MenuLinks = ({ isOpen }) => {
 
 			} catch (error) {
 				window.alert('You need to allow MetaMask.');
+        // Ajouter un pop up qui notifie le refus de la connexion ou erreur plutot que alert
         web3 = undefined;
 				return;
 			}
       const coinbase = await web3.eth.getCoinbase();
-      // console.log(coinbase);
-
       if (!coinbase) {
         web3 = undefined;
         // window.alert('Please activate MetaMask first.');
+        // pop up encore
         return;
       }
 
       const publicAddress = coinbase.toLowerCase();
-      // setCurrentAccount(publicAddress);
-      // console.log(currentAccount, "wsh la zone !");
         fetch(
           "http://192.168.1.13:3000/api/user", {
             body: JSON.stringify({"address" : publicAddress}),
@@ -149,16 +118,11 @@ const MenuLinks = ({ isOpen }) => {
             method: 'POST',}
         )
           .then((response) => response.json())
-          // If yes, retrieve it. If no, create it.
           .then((users) =>
-            // console.log(users.nonce)
             users
           )
-          // Popup MetaMask confirmation modal to sign message
           .then(handleSignMessage)
-          // Send signature to backend on the /auth route
           .then(handleAuthenticate)
-          // Pass accessToken back to parent component (to save it in localStorage)
           .then((resp) => {localStorage.setItem("accessToken", resp.token);
                           window.location.reload()})
           .catch((err) => {
@@ -186,7 +150,6 @@ const Disconnect = () => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        {/* <MenuItem onClick={()=> console.log("oui")} isLast > */}
           {currentAccount ? (<Button
             onClick={ () => {
               Disconnect();
@@ -214,7 +177,6 @@ const Disconnect = () => {
           >
             Connect with MetaMask
           </Button> )}
-        {/* </MenuItem> */}
       </Stack>
     </Box>
   );
@@ -228,7 +190,6 @@ const NavBarContainer = ({ children,  background}) => {
       justify="space-between"
       wrap="wrap"
       w="100%"
-    //   mb={8}
       p={8}
       bg={background == "transparent" ? ["transparent", "transparent", "transparent", "transparent"] : ["black", "black", "black", "black"]}
       color={["white", "white", "black", "black"]}
@@ -236,7 +197,6 @@ const NavBarContainer = ({ children,  background}) => {
       {children}
     </Flex>
   );
-  
 };
 return (
   <NavBarContainer background={background}>
