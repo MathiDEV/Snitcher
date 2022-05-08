@@ -1,32 +1,25 @@
-![](https://github.com/socialeonet/HackatonStarton/blob/main/assets/icon.png?raw=true)
+<img src = 'https://github.com/socialeonet/HackatonStarton/blob/main/assets/icon.png?raw=true' width="100px"/>
+
 # Snitcher
+# Démo du site : https://snitcher.socialeo.net
 
 ## Problème
-*Quel problème votre projet résout-il ? Comment s'inscrit-il dans le thème "Construire un avenir décentralisé" ?* <br/><br/>
-Our project makes information easy to obtain, and will keep blockchain users updated on everything based on what they are searching for. It'll be easier for beginner and more experienced users to make descision following successul investissor.
+Our project makes information easy to obtain, and will keep blockchain users updated on everything based on what they are searching for. It'll be easier for beginner and more experienced users to make decisions by following successul investissors they have interest in.
 
 ## Solution
-*Comment avez-vous résolu ce problème ? Quelles technologies avez-vous utilisé ? Quel a été le plus grand défi technique, comment votre solution le résout-elle ?*<br/><br/>
-Nous avons
-We solved this problem by creating a no code automatisation platform, to achieve this we used React, Express, and MariaDB. Our biggest technical challenge was to implement connection with MetaMask, we worked really hard all together and succeeded.
+We solved our problem by creating a no code automatisation platform <br />
+To achieve this we used React, Express, and MariaDB. Our biggest technical challenge was to implement the login with MetaMask, we worked really hard all together and succeeded.
 
 ## Installation
-*Expliquez, étape par étape, comment quelqu'un peut installer votre projet et jouer avec. Le jury utilisera principalement MacOS, Ubuntu, Android et iOS. Mettre en place un docker / docker-compose est une bonne idée pour permettre à quelqu'un de tester facilement le projet.*<br/><br/>
-It's child's play ! You just need to have a MetaMask wallet ! And go to our website, then it's almost done ! After connecting you will be able to track all the wallets on the Ethereum mainnet, create an aplet and then it's all done, you will be notified as soon as someone make a transaction !
+You will find in the repository 2 folders : frontend & backend.<br />
+You need to create a .env with many API keys in the backend folder documented into an `.env.example`file, so instead, we found more easy to deploy our solution on a publicy available website.<br />
+
+Go in each folder in order to launch `npm install` followed by `npm start`.
+If everything is set as it should, you will be welcomed on our solution and you will be able to connect with your metamask wallet.
 
 
 ## Équipe et commentaires
-*Précisez le nom de votre équipe (le même que sur le discord), et dites-nous ce que vous avez appris durant ce hackathon !*<br/><br/>
 Our name is Snitcher. We learned how to use React and Express, and we took a lot of time to understand how MetaMask and the web3 worked, at the end of these two days we now have knowloedge on all of these things !
 
 ## Rendu
-* Fournissez une explication des fonctionnalités de vos projets. Vous devez obligatoirement lier une vidéo de démonstration et preciser avec screen recording et commentaire.<br/><br/>
 
-
-(exemple: Loom , 4 minutes max)*.
-
-## Présentation du Vendredi 13 Mai (4 minutes) 
-
-*Pitch physique 
-
- *Pitch stream (ShareScreen/GoogleMeet)
