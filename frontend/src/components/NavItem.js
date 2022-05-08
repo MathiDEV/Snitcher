@@ -30,7 +30,7 @@ export default function NavItem({ icon, title, active, navSize, href }) {
                     w={navSize == "large" && "100%"}
                     onClick={() => history(href)}
                 >
-                    <MenuButton w="100%">
+                    <MenuButton w={navSize == "large" ? "160px" : "100%"}>
                         <Flex>
                             <Icon as={icon} fontSize="xl" />
                             <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>

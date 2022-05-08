@@ -23,8 +23,7 @@ function Search() {
     }
 
     return (
-        <Box w='100%'>
-            <Heading mt={3}>Search</Heading>
+        <Box w='100%' mt={5}>
             <Flex justify="center">
                 <InputGroup mt={3} w='90%' maxW={500}>
                     <InputLeftElement
