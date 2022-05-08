@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/socialeonet/HackatonStarton#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "discord-webhook-node": "^1.1.8",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",

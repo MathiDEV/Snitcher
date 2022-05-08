@@ -28,7 +28,7 @@ const check_user = (req, res) => {
 const create_token = (req, res, address, nonce, id) => {
     database.execute('UPDATE wallets SET nonce = ? WHERE wallet = ?', [nonce, address.toLowerCase()], (err, results) => {
         if (err) return false;
-        const token = jwt.sign({ address: address.toLowerCase(), id: id }, process.env.SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ address: address.toLowerCase(), id: id }, process.env.SECRET, { expiresIn: '24h' });
         return res.status(200).json({ token: token });
     });
 }
