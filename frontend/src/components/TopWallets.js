@@ -7,7 +7,7 @@ import WalletCard from '../components/WalletCard'
 export default function TopWallets(props) {
     const [wallets, setWallets] = useState(undefined);
     fetch("http://localhost:3000/bestusers").then(res => { }).then(data => {
-        setWallets(bestwallets);
+        setWallets(data);
     }).catch(err => {
         setWallets(null);
     });
