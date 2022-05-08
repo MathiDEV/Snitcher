@@ -16,7 +16,7 @@ import {
     IoSearchSharp,
   } from 'react-icons/io5';
   import { ReactElement } from 'react';
-import Iphone from "../assets/iphone.jpg";
+import Iphone from "../assets/Iphone.png";
 import Arrow from "../assets/Background(1).png";
   const Feature = ({ text, icon, iconBg }) => {
     return (
@@ -50,7 +50,7 @@ import Arrow from "../assets/Background(1).png";
             w = {400}
             position = "absolute"
             float = "right"
-            bottom={"0"}
+            bottom={"100"}
             right="100"
               rounded={'md'}
               alt={'feature image'}
@@ -71,9 +71,9 @@ import Arrow from "../assets/Background(1).png";
           </Stack>
           <Flex>
             <Image
-            boxSize="200"
-            width={"300"}
-            height="500"
+            boxSize="300"
+            width={"400"}
+            height="600"
               rounded={'md'}
               alt={'feature image'}
               src={

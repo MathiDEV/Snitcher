@@ -48,7 +48,7 @@ import {
           md: 'row',
         }}
         alignItems={{ md: 'center' }}>
-        <Heading width={300} size={'md'}>{title}</Heading>
+        <Heading width={300} size={'md'}>{title == "Snitcher" ? <Text  as="span" bgGradient='linear(to-r, #FEDB37, #FDB931, #9f7928, #8A6E2F)' bgClip={'text'}>{title}</Text> : title}</Heading>
         <List width={300} spacing={3} textAlign="start">
           {options.map((desc, id) => (
             <ListItem key={desc.id}>
@@ -57,25 +57,18 @@ import {
             </ListItem>
           ))}
         </List>
-        <Heading width={300} size={'xl'}>{typePlan}<Text as='span' fontSize={"xs"}>/month</Text></Heading>
+        <Heading width={300} size={'xl'}><Text as="span" bgGradient='linear(to-t, #5076FF, #69A5FF)' bgClip={'text'}>{typePlan}</Text><Text as='span' fontSize={"xs"}>/month</Text></Heading>
       </Stack>
     );
   };
   const ThreeTierPricingHorizontal = () => {
     return (
-      <Box py={6} px={5} min={'100vh'} bg = "#f5f6fa">
+      <Box py={6} px={5} min={'100vh'} bg = "#f5f6fa" pb={50} pt={50}>
         <Stack spacing={4} width={'100%'} direction={'column'}>
           <Stack
             p={5}
             alignItems={'center'}
-            justifyContent={{
-              base: 'flex-start',
-              md: 'space-around',
-            }}
-            direction={{
-              base: 'column',
-              md: 'row',
-            }}>
+            >
             <Stack
               width={{
                 base: '100%',
@@ -83,7 +76,7 @@ import {
               }}
               textAlign={'center'}>
               <Heading size={'lg'}>
-                The Right Plan for <Text color="blue.400">You !</Text>
+                The Right Plan for <Text as="span" bgGradient='linear(to-t, #5076FF, #69A5FF)' bgClip={'text'}>You !</Text>
               </Heading>
             </Stack>
             <Stack
