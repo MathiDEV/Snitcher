@@ -4,7 +4,7 @@
 # Démo du site : https://snitcher.socialeo.net
 
 ## Problème
-Our project makes information easy to obtain, and will keep blockchain users updated on everything based on what they are searching for. It'll be easier for beginner and more experienced users to make decisions by following successul investissors they have interest in.
+Our project makes information easy to obtain, and will keep blockchain users updated on everything based on what they are searching for. It'll be easier for beginner and more experienced users to make decisions by following successfull investissors they have interests in.
 
 ## Solution
 We solved our problem by creating a no code automatisation platform <br />
