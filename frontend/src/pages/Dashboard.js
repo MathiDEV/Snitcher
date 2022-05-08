@@ -6,9 +6,9 @@ import Navbar from '../components/Navbar';
 import Sidebar from "../components/Sidebar";
 import DashboardContent from "../dashboard/Dashboard";
 import Search from "../dashboard/Search";
+import Applet from "../dashboard/Applet";
 import { Flex, Box } from "@chakra-ui/react";
 import { Navigate } from "react-router-dom";
-import { Route } from "react-router-dom";
 
 
 function Dashboard() {
@@ -23,6 +23,10 @@ function Dashboard() {
         case 'search':
             page = <Search />;
             page_name = 'search';
+            break;
+        case 'applet':
+            page = <Applet />;
+            page_name = 'applet';
             break;
         default:
             page = <DashboardContent />;

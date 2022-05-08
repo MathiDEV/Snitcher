@@ -7,6 +7,7 @@ import {
     FiMenu,
     FiHome,
     FiSearch,
+    FiPlus,
 } from 'react-icons/fi'
 import NavItem from '../components/NavItem'
 
@@ -41,6 +42,7 @@ export default function Sidebar({page}) {
                 />
                 <NavItem navSize={navSize} icon={FiHome} title="Dashboard" href="/dashboard" active={page == "dashboard"} />
                 <NavItem navSize={navSize} icon={FiSearch} title="Search" href="/dashboard/search" active={page == "search"} />
+                <NavItem navSize={navSize} icon={FiPlus} title="Applet" href="/dashboard/applet" active={page == "applet"} />
             </Flex>
         </Flex>
     )

@@ -6,7 +6,7 @@ import WalletResult from '../components/WalletResult'
 
 
 function Search() {
-    const [search, setSearch] = useState(null)
+    const [search, setSearch] = useState(undefined)
 
     function getWallet(wallet) {
         setSearch(null)
