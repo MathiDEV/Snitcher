@@ -25,10 +25,10 @@ const check_user = (req, res) => {
     });
 }
 
-const create_token = (req, res, address, nonce, id) => {
+const create_token = (req, res, address, nonce) => {
     database.execute('UPDATE wallets SET nonce = ? WHERE wallet = ?', [nonce, address.toLowerCase()], (err, results) => {
         if (err) return false;
-        const token = jwt.sign({ address: address.toLowerCase(), id: id }, process.env.SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ address: address.toLowerCase() }, process.env.SECRET, { expiresIn: '1h' });
         return res.status(200).json({ token: token });
     });
 }
@@ -58,7 +58,7 @@ const login = (req, res) => {
 
             if (recovered.toLowerCase() === address.toLowerCase()) {
                 const nonce = Math.floor(Math.random() * 1000000).toString();
-                return create_token(req, res, address, nonce, results[0].id);
+                return create_token(req, res, address, nonce);
             }
             console.log(recovered.toLowerCase() + "\n" + address.toLowerCase());
             return res.status(400).json({ error: "The signature is not valid" });

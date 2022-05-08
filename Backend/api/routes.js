@@ -3,7 +3,6 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const login = require("./login/login");
 const user = require("./user/user");
-const bestUsers = require("./user/bestUsers");
 const discord = require("./automations/discord");
 const telegram = require("./automations/telegram");
 const twilio = require("./automations/twilio");
@@ -21,16 +20,6 @@ router.post('/user', (req, res) => {
 router.post('/user/changeUsername',auth, (req, res) => {
   console.log(req.body);
   user.changeUsername(req, res);
-});
-
-router.post('/user/saveLater', auth, (req, res) => {
-  console.log(req.body);
-  user.saveLater(req, res);
-});
-
-router.get('/user/bestusers', auth, (req, res) => {
-  console.log(req.body);
-  bestUsers.bestUsers(req, res);
 });
 
 router.post('/automations/discord', (req, res) => {

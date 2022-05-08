@@ -15,7 +15,7 @@ export default function NavItem({ icon, title, active, navSize, href }) {
 
     return (
         <Flex
-            mt={1}
+            mt={5}
             flexDir="column"
             w="100%"
             alignItems={navSize == "small" ? "center" : "flex-start"}
@@ -28,8 +28,9 @@ export default function NavItem({ icon, title, active, navSize, href }) {
                     color={active && "#fff"}
                     _hover={{ textDecor: 'none', backgroundColor: (active ? "#54a0ff" : "#e2e8f0") }}
                     w={navSize == "large" && "100%"}
-                    onClick={() => history(href)}>
-                    <MenuButton w={navSize == "large" ? "250px" : "100%"}>
+                    onClick={() => history(href)}
+                >
+                    <MenuButton w="100%">
                         <Flex>
                             <Icon as={icon} fontSize="xl" />
                             <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>

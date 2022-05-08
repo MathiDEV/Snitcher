@@ -3,31 +3,39 @@ body{
     min-height: 100%;
     height:fit-content;
     overflow: auto;
+    scroll-behavior: smooth;
 }
 
 #root{
     height : 100%;
     min-height: 100%;
-    overflow: auto !important;
+    /* overflow: auto !important; */
 }
+
 .nsContainer {
     width: 100%;
-    height: 100% !important;
+    height: 725px !important;
     background-image: radial-gradient(1600px at 70% 120%, rgba(33, 39, 80, 1) 10%, #020409 100%);
-}
-
-.nsContent {
-    width: inherit;
-    height: inherit;
-}
-
-#nsUniverse {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100% !important;
-    z-index: 0;
+}
+
+#logo{
+    cursor: pointer;
+}
+img{
+    z-index: 1;
+}
+.nsContent {
+    width: inherit;
+    /* height: inherit; */
+}
+
+.hero {
+    position:relative;
+    margin:auto;
+    z-index: 2 !important;
+    font-family: 'Lota', sans-serif;
 }
 
 nav {

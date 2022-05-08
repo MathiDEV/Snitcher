@@ -15,33 +15,6 @@ const changeUsername = (req, res) => {
   }
 }
 
-const saveLater = (req, res) => {
-  const { address, id } = req;
-  const { toSave } = req.body;
-
-  if (!toSave)
-    return res.status(400).json({ error: 'Please select a wallet to save' });
-
-  database.query('SELECT * FROM savelater WHERE save_addr = ? AND address = ?', [toSave, address], (err, result) => {
-    if (err)
-      return res.status(500).json({ error: 'An error occured' });
-    if (result.length > 0) {
-      database.query('DELETE FROM savelater WHERE save_addr = ? AND address = ?', [toSave, address], (err, result) => {
-        if (err)
-          return res.status(500).json({error: 'An error occured'});
-      });
-      return res.status(200).json({success: 'Wallet removed from save later'})
-    } else {
-      database.query('INSERT INTO savelater (id_addr, save_addr, address) VALUES (?, ?, ?)', [id, toSave, address], (err, result) => {
-        if (err)
-          return res.status(500).json({ error: 'An error occured: ' + err.message });
-        return res.status(200).json({ success: 'Wallet saved' });
-      });
-    }
-  });
-}
-
 module.exports = {
-  changeUsername,
-  saveLater
+  changeUsername
 }

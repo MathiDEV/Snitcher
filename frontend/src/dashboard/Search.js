@@ -6,12 +6,9 @@ import WalletResult from '../components/WalletResult'
 
 
 function Search() {
-    const [search, setSearch] = useState(undefined)
+    const [search, setSearch] = useState(null)
 
     function getWallet(wallet) {
-        if (!wallet.length) {
-            return setSearch(undefined);
-        }
         setSearch(null)
         Starton.getWallet(wallet,
             function (error) {
