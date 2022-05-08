@@ -15,7 +15,6 @@ function Dashboard() {
     var { id, type } = useParams();
     var page, page_name;
 
-    // console.log(id, type);
 
     if (!localStorage.getItem("accessToken")){
         return <Navigate to="/" />

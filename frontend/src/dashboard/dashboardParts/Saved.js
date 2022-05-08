@@ -32,7 +32,6 @@ export default function Saved()
 {
     const navigate = useNavigate();
     const [accounts, setAccounts] = useState([]);
-    console.log(accounts);
 
     useEffect(() => {
         fetch ("http://192.168.1.13:3000/api/user/getAllSave",{
@@ -40,7 +39,6 @@ export default function Saved()
         }).then((resp)=>resp.json())
         .then((data) => setAccounts(data.success)).then((e) => localStorage.setItem("savedAddress", JSON.stringify(accounts)));
     }, [])
-    console.log(accounts);
     if (accounts) localStorage.setItem("savedAddress", JSON.stringify(accounts));
 
     function DeleteSaved(address, i){
