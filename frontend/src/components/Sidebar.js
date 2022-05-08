@@ -15,8 +15,8 @@ export default function Sidebar({page}) {
     const [navSize, changeNavSize] = useState("large")
     return (
         <Flex
-            pos="sticky"
-            h="95vh"
+            position="sticky"
+            height="100%"
             boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
             w={navSize == "small" ? "63px" : "200px"}
             flexDir="column"
@@ -40,7 +40,7 @@ export default function Sidebar({page}) {
                             changeNavSize("small")
                     }}
                 />
-                <NavItem navSize={navSize} icon={FiHome} title="Dashboard" href="/dashboard" active={page == "dashboard"} />
+                <NavItem  navSize={navSize} icon={FiHome} title="Dashboard" href="/dashboard" active={page == "dashboard"} />
                 <NavItem navSize={navSize} icon={FiSearch} title="Search" href="/dashboard/search" active={page == "search"} />
                 <NavItem navSize={navSize} icon={FiPlus} title="Applet" href="/dashboard/applet" active={page == "applet"} />
             </Flex>
