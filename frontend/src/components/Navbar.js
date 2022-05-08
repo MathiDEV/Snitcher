@@ -93,9 +93,7 @@ const NavBar = ({ background }) => {
 
                     await ethereum.request({ method: 'eth_requestAccounts' });
 
-
                     web3 = new Web3(window.ethereum);
-                    // console.log(web3);
 
                 } catch (error) {
                     toast({
@@ -145,7 +143,6 @@ const NavBar = ({ background }) => {
                     })
                     .catch((err) => {
                         web3 = undefined;
-                        console.log(err);
                     });
             }
 
@@ -154,7 +151,6 @@ const NavBar = ({ background }) => {
         const Disconnect = () => {
             localStorage.removeItem("accessToken");
             window.location.reload();
-            console.log("oui")
         }
         return (
             <Box

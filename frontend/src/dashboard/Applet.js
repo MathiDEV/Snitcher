@@ -76,10 +76,10 @@ const allEvents = [
 
 
 
-function Applet() {
+function Applet(params) {
     const [event, setEvent] = useState(undefined)
     const [confirmation, setConfirmation] = useState(undefined)
-    const [wallet, setWallet] = useState(undefined)
+    const [wallet, setWallet] = useState(params.data)
     const [action, setAction] = useState(undefined)
     const [title, setTitle] = useState(undefined)
     const [actionForm, setActionForm] = useState({})
@@ -90,6 +90,7 @@ function Applet() {
         {
             "enum": "DISCORD",
             "name": "Discord Webhook",
+            "endpoint": "/api/automations/create/discord",
             "icon": <SiDiscord />,
             "check": (action) => {
                 if (action.url && !action.url.match(/^https:\/\/([\w.]+).com\/api\/webhooks\/[0-9]+\/[a-zA-Z0-9-_]+/))
@@ -123,6 +124,7 @@ function Applet() {
         {
             "enum": "TELEGRAM",
             "name": "Telegram Bot",
+            "endpoint": "/api/automations/create/telegram",
             "icon": <SiTelegram />,
             "check": (action) => {
                 if (action.chatId && !action.chatId.match(/^[0-9]{6,15}$/))
@@ -158,6 +160,7 @@ function Applet() {
         {
             "enum": "TEAMS",
             "name": "Teams Webhook",
+            "endpoint": "/api/automations/create/teams",
             "icon": <SiMicrosoftteams />,
             "check": (action) => {
                 if (action.url && !action.url.match(/^https:\/\/[\w.-]+office\.com\/webhookb2\/[\w@-]+\/IncomingWebhook\/[\w@-]+\/[\w@-]+$/))
@@ -191,6 +194,7 @@ function Applet() {
         {
             "enum": "SMS",
             "name": "Text Message",
+            "endpoint": "/api/automations/create/twilio/text",
             "icon": <FiMessageCircle />,
             "check": (action) => {
                 if (action.number && !action.number.match(/^\+[1-9]\d{1,14}$/))
@@ -391,7 +395,7 @@ function Applet() {
                                         </Flex>
                                         {getAction(action).form(actionError)}
                                     </Box>
-                                    : <ActionsMenu actions={allActions} onChange={(param) => { setAction(param); setActionForm({}); console.log(param) }} />
+                                    : <ActionsMenu actions={allActions} onChange={(param) => { setAction(param); setActionForm({}) }} />
                             }
                         </Stack>
                     </Box>
@@ -419,7 +423,7 @@ function Applet() {
                     _active={{
                         bg: '#4886d4',
                     }}
-                    onClick={()=>{
+                    onClick={() => {
                         if (validationError || titleError || walletError || actionError || !title || !event || !confirmation || !wallet || !action || Object.values(actionForm).filter(function (el) { return el.length; }).length == 0)
                             return toast({
                                 title: 'Your applet structure is incomplete.',
@@ -428,8 +432,33 @@ function Applet() {
                                 duration: 9000,
                                 isClosable: true,
                             })
+                        fetch('http://192.168.1.13:3000' + getAction(action).endpoint, {
+                            method: 'POST', body: JSON.stringify({
+                                title: title,
+                                event: event,
+                                blocks: parseInt(confirmation),
+                                address: wallet,
+                                ...actionForm
+                            }), headers: { "Authorization": "Bearer " + localStorage.getItem('accessToken'), 'Content-Type': 'application/json' }
+                        }).then(res => res.json()).then(data => {
+                            return toast({
+                                title: 'Your applet has been created.',
+                                description: "Your automation will be executed according to your event.",
+                                status: 'success',
+                                duration: 9000,
+                                isClosable: true,
+                            })
+                        }).catch(err => {
+                            return toast({
+                                title: 'Your applet has not been created.',
+                                description: "Check the data you entered before submitting again",
+                                status: 'error',
+                                duration: 9000,
+                                isClosable: true,
+                            })
+                        })
                     }}
-                    >
+                >
                     <FiCpu style={{ "marginRight": 5 }} /> Deploy
                 </Button>
             </Center>

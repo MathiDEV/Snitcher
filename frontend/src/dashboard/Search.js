@@ -8,17 +8,12 @@ import WalletResult from '../components/WalletResult'
 function Search(props = undefined) {
     const [search, setSearch] = useState(undefined)
     let url = props.data;
-    console.log(props.data, "oui")
-    console.log(search)
     if(url != undefined && search == undefined){
-        console.log("ouiii")
         getWallet(url);
-        console.log("fin de ouiii")
     }
     function getWallet(wallet) {
         if (wallet.length == 0)
             return setSearch(undefined)
-        // setSearch(null)
         if (url) url = undefined;
         Starton.getWallet(wallet,
             function (error) {
