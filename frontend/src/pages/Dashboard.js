@@ -12,8 +12,10 @@ import { Navigate } from "react-router-dom";
 
 
 function Dashboard() {
-    var { id } = useParams();
+    var { id, type } = useParams();
     var page, page_name;
+
+    // console.log(id, type);
 
     if (!localStorage.getItem("accessToken")){
         return <Navigate to="/" />
@@ -21,15 +23,15 @@ function Dashboard() {
 
     switch (id) {
         case 'search':
-            page = <Search />;
+            page = <Search data={type}/>;
             page_name = 'search';
             break;
         case 'applet':
-            page = <Applet />;
+            page = <Applet data={type}/>;
             page_name = 'applet';
             break;
         default:
-            page = <DashboardContent />;
+            page = <DashboardContent data={type}/>;
             page_name = 'dashboard';
             break;
     }
@@ -47,7 +49,7 @@ function Dashboard() {
     return (
         <>
             <Navbar />
-            <Flex>
+            <Flex height={"100%"}>
                 <Sidebar page={page_name} />
                 <Box w='5'/>
                 {page}

@@ -5,21 +5,34 @@ import Starton from '../api/Starton'
 import WalletResult from '../components/WalletResult'
 
 
-function Search() {
+function Search(props = undefined) {
     const [search, setSearch] = useState(undefined)
-
+    let url = props.data;
+    console.log(props.data, "oui")
+    console.log(search)
+    if(url != undefined && search == undefined){
+        console.log("ouiii")
+        getWallet(url);
+        console.log("fin de ouiii")
+    }
     function getWallet(wallet) {
         if (wallet.length == 0)
             return setSearch(undefined)
-        setSearch(null)
+        // setSearch(null)
+        if (url) url = undefined;
+        console.log("oui oui non non ")
         Starton.getWallet(wallet,
             function (error) {
+                console.log("oui mon sah")
                 setSearch({ status: false, error: error })
             },
             function (data) {
+                console.log("tout s'est bien passé")
                 setSearch({ status: true, data: data })
+                console.log(search)
             }
         )
+        console.log("finininini")
     }
 
     return (
@@ -30,7 +43,8 @@ function Search() {
                         pointerEvents='none'
                         children={<FiSearch />}
                     />
-                    <Input onKeyPress={(e) => {
+                    <Input
+                    onKeyPress={(e) => {
                         if (e.key === 'Enter') {
                             getWallet(e.target.value)
                         }

@@ -3,8 +3,11 @@ import { Box, Avatar, Text, Stack, Badge, Button, Flex, Td, Thead, Table, TableC
 import { FiBookmark, FiCpu } from 'react-icons/fi'
 import { FaEthereum } from 'react-icons/fa'
 import WalletLogo from '../assets/wallet.png'
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Logo({ data }) {
+    const navigate = useNavigate();
     let estimation;
     if (localStorage.getItem('ethvalue')) {
         estimation = (parseFloat(data.balance.formatted) * parseFloat(localStorage.getItem('ethvalue'))).toFixed(2);
@@ -14,7 +17,6 @@ export default function Logo({ data }) {
             minW={'320px'}
             w='50%'
             maxW={'620px'}
-            w={'full'}
             bg={'white'}
             boxShadow={'2xl'}
             rounded={'lg'}
@@ -107,7 +109,8 @@ export default function Logo({ data }) {
                     }}
                     _active={{
                         bg: '#4886d4',
-                    }}>
+                    }}
+                    onClick={() => navigate("/dashboard/applet/"+data.address)}>
                     <FiCpu style={{ "marginRight": 5 }} /> Automatize
                 </Button>
             </Stack>
