@@ -79,7 +79,7 @@ export default function Saved()
             <Box         overflowY={"auto"}>
             {accounts.map((data, i) => {
                 return (
-                    <Flex justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5">
+                    <Flex justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5" pl="5">
                         <Text fontWeight={600} color={'gray.500'} >
                             <Link to={"/dashboard/search/"+data.save_addr}>
                             {data.save_addr}

@@ -126,7 +126,7 @@ export default function Logo({ data }) {
                     _focus={{
                         bg: 'gray.200',
                     }}
-                    onClick={() => { console.log("oui");addOrRemove(data.address); navigate("/dashboard/search")}}>
+                    onClick={() => { console.log("oui");addOrRemove(data.address); navigate("/dashboard/search"); window.location.reload()}}>
                     <FiBookmark style={{ "marginRight": 5 }}/>
                         { check(data.address) ? "Delete from saved" : "Save for later"
                         }

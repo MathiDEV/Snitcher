@@ -19,7 +19,7 @@ import {
     IoLogoBitcoin,
     IoSearchSharp,
   } from 'react-icons/io5';
-  import { ReactElement, useState} from 'react';
+  import { ReactElement, useState, useEffect} from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import { FiEdit2 } from 'react-icons/fi';
 import { FiCpu } from 'react-icons/fi';
@@ -31,17 +31,23 @@ const testAccounts = ["AZERAZERAZERAZERAZER","AZERAZERAZERAZERAZER","AZERAZERAZE
 
 export default function Applets() 
 {
-    const [accounts, setAccounts] = useState(testAccounts);
+    const [accounts, setAccounts] = useState([]);
 
 
+    useEffect(() => {
+        fetch ("http://192.168.1.13:3000/api/user/automations",{
+            headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken")},
+        }).then((resp)=>resp.json())
+        .then((data) => data ? setAccounts([]) : setAccounts(data.success));
+    }, [])
     console.log(accounts);
     return (
-<Stack  direction={'column'} 
+<Stack  direction={'column'}
         height="500px"
-        maxwidth="50px" 
+        maxwidth="50px"
         width={400}
-        // align={'center'} 
-        mt="10" ml={10} p="3" 
+        // align={'center'}
+        mt="10" ml={10} p="3"
         borderRadius={"xl"} boxShadow={"2xl"}
         // divider={
         //     <StackDivider
@@ -55,9 +61,9 @@ export default function Applets()
             <Box overflowY={"auto"}>
             {accounts.map((data) => {
                 return (
-                    <Flex justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5">
+                    <Flex justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5" pl="5">
                         <Text fontWeight={600} color={'gray.500'} >
-                            {data}
+                            {data.options.title}
                         </Text>
                         <Flex as='span' alignItems={"center"} ml="10" w={125}>
                             <Spacer/>
