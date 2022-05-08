@@ -55,7 +55,7 @@ export default function Applets()
             <Box         overflow={"scroll"}>
             {accounts.map((data) => {
                 return (
-                    <Flex justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5">
+                    <Flex justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5" pl="5">
                         <Text fontWeight={600} color={'gray.500'} >
                             {data}
                         </Text>
