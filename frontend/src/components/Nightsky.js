@@ -156,11 +156,13 @@ export default function Nightsky(props) {
     });
 
     return (
+        <>
+        <Navbar background="transparent" />
         <div className="nsContainer">
-            <Navbar background="transparent" />
             <div className="nsContent">
                 <canvas id="nsUniverse"></canvas>
             </div>
         </div>
+        </>
     );
 }

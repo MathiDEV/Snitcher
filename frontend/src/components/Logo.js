@@ -7,7 +7,7 @@ export default function Logo(props) {
     <Box {...props}>
         <Flex align="center">
             <img src={logo} alt="Logo of Snitcher" style={{"height":"50px"}}/>
-            <Text fontSize="2xl" fontWeight="bold" fontFamily="'Lato', sans-serif" ml="5">
+            <Text fontSize="2xl" fontWeight="bold" fontFamily="'Lato', sans-serif" ml="5" id="logo">
             Snitcher
             </Text>
         </Flex>

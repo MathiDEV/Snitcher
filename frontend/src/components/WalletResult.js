@@ -20,7 +20,6 @@ export default function WalletResult({ data }) {
                 minW={'320px'}
                 w='50%'
                 maxW={'620px'}
-                w={'full'}
                 bg={'white'}
                 boxShadow={'2xl'}
                 rounded={'lg'}
@@ -121,7 +120,6 @@ export default function WalletResult({ data }) {
             minW={'320px'}
             w='50%'
             maxW={'620px'}
-            w={'full'}
             bg={'white'}
             boxShadow={'2xl'}
             rounded={'lg'}
