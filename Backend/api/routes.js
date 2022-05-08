@@ -22,6 +22,12 @@ router.post('/user/changeUsername',auth, (req, res) => {
   user.changeUsername(req, res);
 });
 
+router.get('/user/bestusers', auth, (req, res) => {
+    console.log(req.body);
+    bestUsers.bestUsers(req, res);
+  });
+
+
 router.post('/automations/discord', (req, res) => {
   discord.sendMessage(req.body.url, req.body.from, req.body.to, req.body.amount, req.body.currency);
   res.send("Message sent");
