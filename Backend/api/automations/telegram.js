@@ -1,4 +1,5 @@
 const request = require('request');
+const json = require("../json/json");
 
 const sendMessage = (chatId, from, to, amount, currency) => {
     if (!chatId || !from || !to || !amount || !currency)
@@ -17,6 +18,18 @@ const sendMessage = (chatId, from, to, amount, currency) => {
     });
 }
 
+const create_telegram_json = (title, chatId, user_id) => {
+    return json.create_webhook_json(
+        title,
+        "telegram",
+        {
+            chatId: chatId,
+        },
+        user_id
+    );
+}
+
 module.exports = {
-    sendMessage
+    sendMessage,
+    create_telegram_json
 }
