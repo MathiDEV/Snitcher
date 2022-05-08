@@ -44,4 +44,8 @@ router.post('/create/:type/:action?', auth, (req, res) => {
     starton.create_automation(req, res, options);
 });
 
+router.get('/delete/:id', auth, (req, res) => {
+    starton.delete_automation(req, res);
+});
+
 module.exports = router;
