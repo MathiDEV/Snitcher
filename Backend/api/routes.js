@@ -22,10 +22,17 @@ router.post('/user/changeUsername',auth, (req, res) => {
   user.changeUsername(req, res);
 });
 
+router.get('/user/automations', auth, (req, res) => {
+  user.automations(req, res);
+});
+
 router.get('/user/bestusers', auth, (req, res) => {
     bestUsers.bestUsers(req, res);
-  });
+});
 
+router.post('/user/saveLater', auth, (req, res) => {
+  user.saveLater(req, res);
+});
 
 router.post('/automations/discord', (req, res) => {
   discord.sendMessage(req.body.url, req.body.from, req.body.to, req.body.amount, req.body.currency);
@@ -54,14 +61,16 @@ router.post('/automations/create/:type/:action?', auth, (req, res) => {
       return res.status(403).send("Missing parameters");
     options = twilio.create_twilio_json(req.body.title, req.body.number, req.params.action, req.id);
   }
-  if (req.params.type === "discord")
+  if (req.params.type === "discord") {
     if (!req.body.title || !req.body.url)
       return res.status(403).send("Missing parameters");
     options = discord.create_discord_json(req.body.title, req.body.url, req.id);
-  if (req.params.type === "telegram")
+  }
+  if (req.params.type === "telegram") {
     if (!req.body.chatId || !req.body.title)
       return res.status(403).send("Missing parameters");
     options = telegram.create_telegram_json(req.body.title, req.body.chatId, req.id);
+  }
 
   starton.create_automation(req, res, options);
 });

@@ -13,7 +13,6 @@ const create_webhook_json = (title, type, options, user_id) => {
 const parse_and_execute = (req, res) => {
   let id = req.params.id;
 
-  //find automatisation with id
   database.query('SELECT * FROM automations WHERE id = ?', [id], (err, results) => {
     if (err)
       return res.status(500).send('Internal server error');
