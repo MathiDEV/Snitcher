@@ -6,12 +6,18 @@ import WalletCard from '../components/WalletCard'
 
 export default function TopWallets(props) {
     const [wallets, setWallets] = useState(undefined);
-    fetch("http://192.168.1.13:3000/user/bestusers").then(res => { }).then(data => {
-        setWallets(data);
-    }).catch(err => {
-        setWallets(null);
-    });
 
+    if (wallets === undefined) {
+        fetch("http://192.168.1.13:3000/api/user/bestusers", { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") } }).then(data => {
+            data.json().then(data => {
+                setWallets(data);
+            }).catch(err => {
+                setWallets(null);
+            });
+        }).catch(err => {
+            setWallets(null);
+        });
+    }
     return (
         <>
             <Heading textAlign={"center"} mb={"5"} fontWeight={"light"} fontSize={"3xl"}><b>Top 10</b> best wallets</Heading>
