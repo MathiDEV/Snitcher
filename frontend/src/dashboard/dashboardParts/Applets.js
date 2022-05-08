@@ -52,7 +52,7 @@ export default function Applets()
         >
         {/* <Container> */}
           <Flex alignItems={"center"}><FiCpu style={{"margin" : "0 0 0 5px", "font-size" : "30px"}}/><Text ml= "2"fontSize={30} fontWeight="600" color={'black'}>My Applets </Text></Flex>
-            <Box         overflow={"scroll"}>
+            <Box overflowY={"auto"}>
             {accounts.map((data) => {
                 return (
                     <Flex justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5">
