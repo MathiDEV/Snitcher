@@ -10,6 +10,7 @@ const auth = (req, res, next) => {
         if (err)
             return res.status(401).json({ "error": 'Token is not valid' });
         req.address = decoded['address'];
+        req.id = decoded['id'];
         next();
     });
 }
