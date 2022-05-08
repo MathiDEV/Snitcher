@@ -1,6 +1,5 @@
 ## Problème
 *Quel problème votre projet résout-il ? Comment s'inscrit-il dans le thème "Construire un avenir décentralisé" ?*
-Notre projet rends les informations plus accessible aux utilisateurs de la blockchain et leurs d'être tenue informé dans les plus brefs délai de façon personnalisée, il permet aux personnes qui auraient besoin d'aide de se lancer sur le WEB 3.0.
 Our project makes information easy to obtain, and will keep blockchain users updated on everything based on what they are searching for. It'll be easier for beginner and more experienced users to make descision following successul investissor.
 
 ## Solution
