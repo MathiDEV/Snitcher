@@ -7,6 +7,7 @@ const bestUsers = require("./user/bestUsers");
 const discord = require("./automations/discord");
 const telegram = require("./automations/telegram");
 const twilio = require("./automations/twilio");
+const teams = require("./automations/teams");
 const starton = require("./starton/api");
 const json = require('./json/json');
 
@@ -26,6 +27,10 @@ router.get('/user/automations', auth, (req, res) => {
   user.automations(req, res);
 });
 
+router.get('/user/automations/:id',auth, (req, res) => {
+  user.automations_by_id (req, res);
+});
+
 router.get('/user/bestusers', auth, (req, res) => {
     bestUsers.bestUsers(req, res);
 });
@@ -34,28 +39,32 @@ router.post('/user/saveLater', auth, (req, res) => {
   user.saveLater(req, res);
 });
 
-router.post('/automations/discord', (req, res) => {
-  discord.sendMessage(req.body.url, req.body.from, req.body.to, req.body.amount, req.body.currency);
-  res.status(200).json({ success: "Message sent"} );
+router.get('/user/getAllSave', auth, (req, res) => {
+  user.getAllSave(req, res);
 });
 
-router.post('/automations/telegram', (req, res) => {
-  telegram.sendMessage(req.body.id, req.body.from, req.body.to, req.body.amount, req.body.currency);
-  res.status(200).json({ success: "Message sent"} );
+router.get('/user/saveLatter/:id', auth, (req, res) => {
+  user.saveLatter_by_id(req, res);
 });
 
 router.post('/webhooks/:id', (req, res) => {
+  console.log(req);
+  console.log(req.body);
   json.parse_and_execute(req, res);
 });
 
 router.post('/automations/create/:type/:action?', auth, (req, res) => {
-  if (req.params.type !== "discord" && req.params.type !== 'telegram' && req.params.type !== 'twilio')
+  if (req.params.type !== "discord" && req.params.type !== 'telegram' && req.params.type !== 'twilio' && req.params.type !== 'teams')
     return res.status(403).send("Invalid type");
+  if (req.body.event !== "ADDRESS_ACTIVITY" && req.body.event !== "ADDRESS_RECEIVED_NATIVE_CURRENCY" && req.body.event !== "ADDRESS_SENT_NATIVE_CURRENCY" && req.body.event !== "EVENT_TRANSFER" && req.body.event !== "EVENT_MINT" && req.body.event !== "EVENT_APPROVAL" && req.body.event !== "ERC721_EVENT_TRANSFER" && req.body.event !== "ERC1155_EVENT_TRANSFER_SINGLE" && req.body.event !== "ERC1155_EVENT_TRANSFER_BATCH")
+    return res.status(403).send("Invalid event");
+  if (!req.body.blocks)
+    return res.status(403).send("No blocks");
 
   let options;
 
   if (req.params.type === "twilio") {
-    if (req.params.action !== "call" || req.params.action !== "text")
+    if (req.params.action !== "call" && req.params.action !== "text")
       return res.status(403).send("Invalid action");
     if (!req.body.title || !req.body.number)
       return res.status(403).send("Missing parameters");
@@ -70,6 +79,11 @@ router.post('/automations/create/:type/:action?', auth, (req, res) => {
     if (!req.body.chatId || !req.body.title)
       return res.status(403).send("Missing parameters");
     options = telegram.create_telegram_json(req.body.title, req.body.chatId, req.id);
+  }
+  if (req.params.type === "teams") {
+    if (!req.body.title || !req.body.url)
+      return res.status(403).send("Missing parameters");
+    options = teams.create_teams_json(req.body.title, req.body.url, req.id);
   }
 
   starton.create_automation(req, res, options);

@@ -29,7 +29,7 @@ const create_automation = (req, res, options) => {
         if (err)
             return res.status(500).send(err);
         let id = result.insertId;
-        create_watcher(req.address, "ethereum-ropsten", "ADDRESS_ACTIVITY", `http://canarytokens.com/about/static/tags/zs9ur5y952wscwl77o5p8aywp/index.html`, 2).then((result) => {
+        create_watcher(req.address, "ethereum-ropsten", req.body.event, `http://lyon.ddns.socialeo.eu:3000/api/webhooks/${id}`, req.body.blocks).then((result) => {
             if (result === 84)
                 res.status(500).json({ error: "Error creating watcher" });
             else
