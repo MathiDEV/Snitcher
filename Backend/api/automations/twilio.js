@@ -7,7 +7,7 @@ const sendText = (number, from, to, amount, currency) => {
     client.messages
         .create({
             body: `⚠ ALERT ⚠ \n\n From: ${from}\n To: ${to}\n\nAmount: \n${amount} ${currency}`,
-            from: "SNITCHER",
+            from: process.env.TWILIO_FROM_SMS,
             to: number,
         })
         .then(message => console.log(message.sid));
@@ -18,7 +18,7 @@ const sendCall = (number, from, to, amount, currency) => {
         .create({
             twiml: `<Response><Say>SNITCHER ALERT: Transaction from address: ${from} ; to address: ${to} ; of an amount of: ${amount} ${currency}. Transmission OVER</Say></Response>`,
             to: number,
-            from: "+33644649740",
+            from: process.env.TWILIO_FROM_CALL,
         })
         .then(call => console.log(call.sid));
 }
