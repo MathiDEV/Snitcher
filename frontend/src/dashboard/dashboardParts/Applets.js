@@ -40,7 +40,7 @@ export default function Applets() {
         fetch("http://192.168.1.13:3000/api/user/automations", {
             headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") },
         }).then((resp) => resp.json())
-            .then((data) => setAccounts(data.automations));
+            .then((data) => data ? setAccounts([]) : setAccounts(data.automations));
     }, [])
     return (
         <Stack direction={'column'}

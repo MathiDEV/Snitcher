@@ -140,7 +140,7 @@ export default function Logo({ data }) {
                     _focus={{
                         bg: 'gray.200',
                     }}
-                    onClick={() => { addOrRemove(data.address); }}>
+                    onClick={() => { addOrRemove(data.address); setAccounts([])}}>
                     <FiBookmark style={{ "marginRight": 5 }} />
                     {check(data.address) ? "Delete from saved" : "Save for later"
                     }
