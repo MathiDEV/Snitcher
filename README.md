@@ -1,3 +1,6 @@
+![](https://github.com/socialeonet/HackatonStarton/blob/main/assets/icon.png?raw=true)
+# Snitcher
+
 ## Problème
 *Quel problème votre projet résout-il ? Comment s'inscrit-il dans le thème "Construire un avenir décentralisé" ?* <br/><br/>
 Our project makes information easy to obtain, and will keep blockchain users updated on everything based on what they are searching for. It'll be easier for beginner and more experienced users to make descision following successul investissor.
