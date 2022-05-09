@@ -37,7 +37,7 @@ If everything is set as it should, you will be welcomed on our solution and you 
 
 ## Team and comments
 
-Our name is **Snitcher**, because our application will whatch for everything happening on the blockchain and **snitch** it to you via the means of communication of **your choice**.
+Our name is **Snitcher**, because our application will watch for everything happening on the blockchain and **snitch** it to you via the means of communication of **your choice**.
 
 We learned how to use React and Express _(we mastered PhP better, but we wanted to add a little challenge)_, and we took a lot of time to understand how MetaMask and the web3 works, at the end of these two days we now have knowloedge on all of these things!
 
