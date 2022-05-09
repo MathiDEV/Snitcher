@@ -1,4 +1,4 @@
-<img src = 'https://github.com/socialeonet/HackatonStarton/blob/main/assets/icon.png?raw=true' width="100px"/>
+<img src = 'https://github.com/socialeonet/HackatonStarton/blob/main/assets/logo.png?raw=true' width="100px"/>
 
 # Snitcher
 # Démo du site : https://snitcher.socialeo.net
