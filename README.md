@@ -46,4 +46,4 @@ We learned how to use React and Express _(we mastered PhP better, but we wanted 
 ## Delivery
 
 - [Video](https://socialeo-my.sharepoint.com/:f:/g/personal/thomas_mazaud_socialeo_net/EgqW56jmdmpJg7rEoA3oSiABQATxu98PhDCP3ofj_WPcfw?e=698yC7)
-- [Website](https://starton.socialeo.net)
+- [Website](https://snitcher.socialeo.net)
