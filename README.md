@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="50" height="50" src="https://github.com/socialeonet/HackatonStarton/blob/main/assets/logo.png">
+  <img width="50" height="50" alt="Snitcher logo" src="https://github.com/socialeonet/HackatonStarton/blob/main/assets/logo.png">
 </p>
 
 # Snitcher
@@ -12,6 +12,8 @@ Our project makes information **easy to obtain**, and will keep blockchain users
 
 ## Solution
 We solved our problem by creating a no code automatisation platform.
+
+![Screenshot of pages](https://raw.githubusercontent.com/socialeonet/HackatonStarton/main/assets/Screenshots.png)
 
 To achieve this, we used React, Express, MariaDB and oviously the **Starton API**. Our biggest technical challenge was to implement the login with MetaMask, we worked really hard all together and **succeeded.**
 
