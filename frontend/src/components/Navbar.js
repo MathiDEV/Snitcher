@@ -68,7 +68,7 @@ const NavBar = ({ background }) => {
         }
 
         const handleAuthenticate = ({ address, signature }) =>
-            fetch(`http://192.168.1.13:3000/api/auth`, {
+            fetch(`https://api.snitcher.socialeo.net/api/auth`, {
                 body: JSON.stringify({ address, signature }),
                 headers: {
                     'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ const NavBar = ({ background }) => {
 
                 const publicAddress = coinbase.toLowerCase();
                 fetch(
-                    "http://192.168.1.13:3000/api/user", {
+                    "https://api.snitcher.socialeo.net/api/user", {
                     body: JSON.stringify({ "address": publicAddress }),
                     headers: {
                         'Content-Type': 'application/json',

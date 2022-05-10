@@ -8,7 +8,7 @@ export default function TopWallets(props) {
     const [wallets, setWallets] = useState(undefined);
 
     if (wallets === undefined) {
-        fetch("http://192.168.1.13:3000/api/user/bestusers", { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") } }).then(data => {
+        fetch("https://api.snitcher.socialeo.net/api/user/bestusers", { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") } }).then(data => {
             data.json().then(data => {
                 setWallets(data);
             }).catch(err => {

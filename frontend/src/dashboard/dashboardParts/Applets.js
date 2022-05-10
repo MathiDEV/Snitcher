@@ -37,7 +37,7 @@ export default function Applets() {
 
 
     useEffect(() => {
-        fetch("http://192.168.1.13:3000/api/user/automations", {
+        fetch("https://api.snitcher.socialeo.net/api/user/automations", {
             headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") },
         }).then((resp) => resp.json())
             .then((data) => setAccounts(data.automations));

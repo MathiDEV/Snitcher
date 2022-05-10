@@ -1,5 +1,5 @@
 import { InputGroup, InputLeftElement, InputRightElement, Button, Badge, Box, Flex, Input, Center, Stack, Text, Divider, FormControl, FormHelperText, FormErrorMessage, Link, useToast } from '@chakra-ui/react'
-import { FiHash, FiX, FiBox, FiMessageCircle } from 'react-icons/fi'
+import { FiHash, FiX, FiBox, FiMessageCircle, FiPhoneCall } from 'react-icons/fi'
 import { useState } from 'react'
 import EventsMenu from '../components/automations/Events'
 import ActionsMenu from '../components/automations/Actions'
@@ -205,6 +205,40 @@ function Applet(params) {
                 <FormControl isInvalid={error}>
                     <InputGroup mt={3} w='100%'>
                         <InputLeftElement children={<FiMessageCircle />} />
+                        {(Object.values(actionForm).filter(function (el) { return el.length; }).length && !error) ?
+                            <InputRightElement
+                                zIndex={0}
+                                color={'green.500'}
+                                children={<FiCheck />}
+                            /> : <></>}
+                        <Input placeholder='Phone number' type="text" onChange={(event) => {
+                            setActionForm({ ...actionForm, number: event.target.value })
+                        }} />
+                    </InputGroup>
+                    {
+                        error ?
+                            <FormErrorMessage>
+                                Invalid international phone number
+                            </FormErrorMessage>
+                            : <></>
+                    }
+                </FormControl>
+            </Box>)
+        },
+        {
+            "enum": "PHONE",
+            "name": "Phone Call",
+            "endpoint": "/api/automations/create/twilio/call",
+            "icon": <FiPhoneCall />,
+            "check": (action) => {
+                if (action.number && !action.number.match(/^\+[1-9]\d{1,14}$/))
+                    return true;
+                return false;
+            },
+            "form": (error) => (<Box>
+                <FormControl isInvalid={error}>
+                    <InputGroup mt={3} w='100%'>
+                        <InputLeftElement children={<FiPhoneCall />} />
                         {(Object.values(actionForm).filter(function (el) { return el.length; }).length && !error) ?
                             <InputRightElement
                                 zIndex={0}
@@ -432,7 +466,7 @@ function Applet(params) {
                                 duration: 9000,
                                 isClosable: true,
                             })
-                        fetch('http://192.168.1.13:3000' + getAction(action).endpoint, {
+                        fetch('https://api.snitcher.socialeo.net' + getAction(action).endpoint, {
                             method: 'POST', body: JSON.stringify({
                                 title: title,
                                 event: event,

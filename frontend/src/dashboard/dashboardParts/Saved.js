@@ -34,7 +34,7 @@ export default function Saved()
     const [accounts, setAccounts] = useState([]);
 
     useEffect(() => {
-        fetch ("http://192.168.1.13:3000/api/user/getAllSave",{
+        fetch ("https://api.snitcher.socialeo.net/api/user/getAllSave",{
             headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken")},
         }).then((resp)=>resp.json())
         .then((data) => setAccounts(data.success)).then((e) => localStorage.setItem("savedAddress", JSON.stringify(accounts)));
@@ -42,7 +42,7 @@ export default function Saved()
     if (accounts) localStorage.setItem("savedAddress", JSON.stringify(accounts));
 
     function DeleteSaved(address, i){
-            fetch("http://192.168.1.13:3000/api/user/saveLater",
+            fetch("https://api.snitcher.socialeo.net/api/user/saveLater",
             {
                 headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken"),
                         'Content-Type': 'application/json' },
