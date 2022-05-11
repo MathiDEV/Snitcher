@@ -38,15 +38,14 @@ import Arrow from "../assets/Background(1).png";
   export default function SplitWithImage() {
     return (
       <Container maxW={'6xl'} py={12} mb={10}>
-        {/* <SimpleGrid columns={{ base: 1, md: 2}} spacing={10}> */}
-        <Flex>
-
+        <Flex id="flexHero">
           <Stack spacing={3} position = "relative">
             <Heading color={"white"} fontSize={"55"}>INTERACT <Text as='span' bgGradient='linear(to-t, #5076FF, #69A5FF)' bgClip={'text'}>SMARTER</Text> WITH BLOCKCHAIN</Heading>
             <Text color={'white'} fontSize={'lg'}>
               Create your own applets and stay connected to the blockchain !
             </Text>
             <Image
+            id="arrow"
             w = {400}
             position = "absolute"
             float = "right"
@@ -69,21 +68,16 @@ import Arrow from "../assets/Background(1).png";
 
             </Stack>
           </Stack>
-          <Flex>
             <Image
-            boxSize="300"
-            width={"400"}
-            height="600"
-              rounded={'md'}
+            id="phone"
+            height="auto"
+            width="30%"
               alt={'feature image'}
               src={
                 Iphone
               }
-              objectFit={'cover'}
-            />
+                />
           </Flex>
-          </Flex>
-        {/* </SimpleGrid> */}
       </Container>
     );
   }

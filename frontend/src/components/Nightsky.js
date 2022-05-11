@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Navbar from '../components/Navbar';
+import { Box } from '@chakra-ui/react';
 import "./Nightsky.css";
 
 export default function Nightsky(props) {
@@ -12,10 +13,10 @@ export default function Nightsky(props) {
         var speedCoeff = .05;
         var width;
         var height;
-        var starCount;
-        var universe;
         var circleRadius;
         var circleCenter;
+        var starCount;
+        var universe;
         var first = true;
         var giantColor = '180,184,240';
         var starColor = '226,225,142';
@@ -157,12 +158,12 @@ export default function Nightsky(props) {
 
     return (
         <>
-        <Navbar background="transparent" />
-        <div className="nsContainer">
-            <div className="nsContent">
-                <canvas id="nsUniverse"></canvas>
+            <Navbar background="transparent" />
+            <div className="nsContainer">
+                <div className="nsContent">
+                    <canvas id="nsUniverse"></canvas>
+                </div>
             </div>
-        </div>
         </>
     );
 }

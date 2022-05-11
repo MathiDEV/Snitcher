@@ -1,6 +1,6 @@
 import { InputGroup, InputLeftElement, InputRightElement, Button, Badge, Box, Flex, Input, Center, Stack, Text, Divider, FormControl, FormHelperText, FormErrorMessage, Link, useToast } from '@chakra-ui/react'
 import { FiHash, FiX, FiBox, FiMessageCircle, FiPhoneCall } from 'react-icons/fi'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import EventsMenu from '../components/automations/Events'
 import ActionsMenu from '../components/automations/Actions'
 import { FiActivity, FiDownload, FiUpload, FiLogOut, FiLogIn, FiCheck, FiArrowRight, FiShuffle, FiCpu } from "react-icons/fi"
@@ -87,27 +87,33 @@ function Applet(params) {
     const titleError = title && !title.match(/^[\w ]+$/)
     const toast = useToast()
 
-    if (type === 'applet' && usable) {
-        Snitcher.getAutomation(params.data)
-            .then(data => {
-                setTitle(data.title)
-            }).catch(err => {
-                toast({
-                    title: 'Error',
-                    description: 'Could not fetch applet data',
-                    status: 'error',
-                    duration: 5000,
-                    isClosable: true
+    useEffect(() => {
+        if (type === 'applet' && usable) {
+            Snitcher.getAutomation(params.data)
+                .then(data => {
+                    const automation = JSON.parse(data.automation.options)
+                    setTitle(automation.title)
+                    setEvent(data.event)
+                    setAction(data.action)
+
+                }).catch(err => {
+                    toast({
+                        title: 'Error',
+                        description: 'Could not fetch applet data',
+                        status: 'error',
+                        duration: 5000,
+                        isClosable: true
+                    })
+                    setUsable(false)
                 })
-                setUsable(false)
-            })
-    }
+        }
+    });
 
     const allActions = [
         {
             "enum": "DISCORD",
             "name": "Discord Webhook",
-            "endpoint": "/api/automations/create/discord",
+            "params": { type: "discord" },
             "icon": <SiDiscord />,
             "check": (action) => {
                 if (action.url && !action.url.match(/^https:\/\/([\w.]+).com\/api\/webhooks\/[0-9]+\/[a-zA-Z0-9-_]+/))
@@ -141,7 +147,7 @@ function Applet(params) {
         {
             "enum": "TELEGRAM",
             "name": "Telegram Bot",
-            "endpoint": "/api/automations/create/telegram",
+            "params": { type: "telegram" },
             "icon": <SiTelegram />,
             "check": (action) => {
                 if (action.chatId && !action.chatId.match(/^[0-9]{6,15}$/))
@@ -177,7 +183,7 @@ function Applet(params) {
         {
             "enum": "TEAMS",
             "name": "Teams Webhook",
-            "endpoint": "/api/automations/create/teams",
+            "params": { type: "teams" },
             "icon": <SiMicrosoftteams />,
             "check": (action) => {
                 if (action.url && !action.url.match(/^https:\/\/[\w.-]+office\.com\/webhookb2\/[\w@-]+\/IncomingWebhook\/[\w@-]+\/[\w@-]+$/))
@@ -211,7 +217,7 @@ function Applet(params) {
         {
             "enum": "SMS",
             "name": "Text Message",
-            "endpoint": "/api/automations/create/twilio/text",
+            "params": { type: "twilio", action: "text" },
             "icon": <FiMessageCircle />,
             "check": (action) => {
                 if (action.number && !action.number.match(/^\+[1-9]\d{1,14}$/))
@@ -245,7 +251,7 @@ function Applet(params) {
         {
             "enum": "PHONE",
             "name": "Phone Call",
-            "endpoint": "/api/automations/create/twilio/call",
+            "params": { type: "twilio", action: "call" },
             "icon": <FiPhoneCall />,
             "check": (action) => {
                 if (action.number && !action.number.match(/^\+[1-9]\d{1,14}$/))
@@ -483,22 +489,22 @@ function Applet(params) {
                                 duration: 9000,
                                 isClosable: true,
                             })
-                        fetch('https://api.snitcher.socialeo.net' + getAction(action).endpoint, {
-                            method: 'POST', body: JSON.stringify({
-                                title: title,
-                                event: event,
-                                blocks: parseInt(confirmation),
-                                address: wallet,
-                                ...actionForm
-                            }), headers: { "Authorization": "Bearer " + localStorage.getItem('accessToken'), 'Content-Type': 'application/json' }
-                        }).then(res => res.json()).then(data => {
-                            return toast({
+                        Snitcher.createAutomation({
+                            title: title,
+                            event: event,
+                            blocks: parseInt(confirmation),
+                            address: wallet,
+                            ...actionForm,
+                            ...getAction(action).params,
+                        }).then(data => {
+                            toast({
                                 title: 'Your applet has been created.',
                                 description: "Your automation will be executed according to your event.",
                                 status: 'success',
                                 duration: 9000,
                                 isClosable: true,
                             })
+                            setUsable(false);
                         }).catch(err => {
                             return toast({
                                 title: 'Your applet has not been created.',

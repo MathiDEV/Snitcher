@@ -1,12 +1,12 @@
 html,
-body{
+body {
     min-height: 100%;
-    height:fit-content;
+    height: fit-content;
     overflow: auto;
     scroll-behavior: smooth;
 }
 
-#root{
+#root {
     height: unset !important;
     overflow: visible;
 }
@@ -20,22 +20,23 @@ body{
     top: 0;
 }
 
-#logo{
+#logo {
     cursor: pointer;
 }
 
 
-img{
+img {
     z-index: 1;
 }
+
 .nsContent {
     width: inherit;
     /* height: inherit; */
 }
 
 .hero {
-    position:relative;
-    margin:auto;
+    position: relative;
+    margin: auto;
     z-index: 2 !important;
     font-family: 'Lota', sans-serif;
 }
@@ -43,4 +44,16 @@ img{
 nav {
     position: relative;
     z-index: 1;
+}
+
+@media screen and (max-width: 890px) {
+    #flexHero {
+        display: block;
+        text-align: center;
+    }
+
+    #phone,
+    #arrow {
+        display: none;
+    }
 }

@@ -56,7 +56,7 @@ const snitcherAPI = {
             new Error("Failed to get saves");
         }).then((response) => response.json())
     },
-    saveToggle : function (address) {
+    saveToggle: function (address) {
         return fetch(`${apiEndpoint}/user/saveLater`, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("accessToken"),
@@ -69,19 +69,32 @@ const snitcherAPI = {
             new Error("Failed to save user");
         }).then((response) => response.json())
     },
-    getAutomation : function (id) {
+    getAutomation: function (id) {
         return fetch(`${apiEndpoint}/user/automations/` + id, { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") } })
-        .then(data => {
-            if (data.ok) return data;
-            new Error("Failed to get automations");
-        }).then(data => data.json())
+            .then(data => {
+                if (data.ok) return data;
+                new Error("Failed to get automations");
+            }).then(data => data.json())
     },
-    getAutomations : function () {
+    getAutomations: function () {
         return fetch(`${apiEndpoint}/user/automations`, { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") } })
-        .then(data => {
-            if (data.ok) return data;
-            new Error("Failed to get automations");
-        }).then(data => data.json())
+            .then(data => {
+                if (data.ok) return data;
+                new Error("Failed to get automations");
+            }).then(data => data.json())
+    },
+    createAutomation: function (automation) {
+        return fetch(`${apiEndpoint}/user/automations/create`, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(automation),
+            method: "POST"
+        }).then((response) => {
+            if (response.ok) return response;
+            new Error("Failed to create automation");
+        }).then((response) => response.json())
     }
 }
 
