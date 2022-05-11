@@ -70,7 +70,7 @@ const snitcherAPI = {
         }).then((response) => response.json())
     },
     getAutomation : function (id) {
-        fetch(`${apiEndpoint}/user/automations/` + id, { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") } })
+        return fetch(`${apiEndpoint}/user/automations/` + id, { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") } })
         .then(data => {
             if (data.ok) return data;
             new Error("Failed to get automations");
