@@ -49,13 +49,13 @@ export default function Applets() {
             mt="10" ml={10} p="3"
             borderRadius={"xl"} boxShadow={"2xl"}
         >
-            <Flex alignItems={"center"}><FiCpu style={{ "margin": "0 0 0 5px", "font-size": "30px" }} /><Text ml="2" fontSize={30} fontWeight="600" color={'black'}>My Applets </Text></Flex>
+            <Flex alignItems={"center"}><FiCpu style={{ "margin": "0 0 0 5px", "fontSize": "30px" }} /><Text ml="2" fontSize={30} fontWeight="600" color={'black'}>My Applets </Text></Flex>
             <Box overflowY={"auto"}>
-                {accounts.map((data) => {
+                {accounts.map((data, i) => {
                     return (
-                        <Flex justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5" pl="5">
+                        <Flex key={"wallet"+i} justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5" pl="5">
                             <Text fontWeight={600} color={'gray.500'} >
-                                {JSON.parse(data.options).title}
+                                {JSON.parse(data.options.trim()).title}
                             </Text>
                             <Flex as='span' alignItems={"center"} ml="10" w={125}>
                                 <Spacer />
