@@ -60,7 +60,7 @@ const delete_automation = (req, res) => {
         if (err)
             return res.status(500).send(err);
         if (result.length === 0)
-            return res.status(404).json({ error: "Automation not found" });
+            return res.status(400).json({ error: "Automation not found" });
         delete_watcher(result[0].id_watcher).then((result) => {
                 if (result === 84)
                     res.status(500).json({ error: "Error deleting watcher" });

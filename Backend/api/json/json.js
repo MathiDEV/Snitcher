@@ -18,7 +18,7 @@ const parse_and_execute = (req, res) => {
       return res.status(500).send('Internal server error');
     else
       if (results.length === 0)
-        return res.status(404).send('Automation not found');
+        return res.status(400).send('Automation not found');
       else {
         let automation = results[0];
         let options = JSON.parse(automation.options);

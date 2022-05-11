@@ -75,11 +75,11 @@ const automations = (req, res) => {
 
 const automations_by_id = (req, res) => {
   const { id } = req.params;
-  database.query('SELECT * FROM automations WHERE id = ? AND id_addr', [id, req.user], (err, result) => {
+  database.query('SELECT * FROM automations WHERE id = ? AND id_addr = ?', [id, req.id], (err, result) => {
     if (err)
       return res.status(500).json({ error: 'An error occured' });
     if (result.length === 0)
-      return res.status(404).json({ error: 'Automation not found' });
+      return res.status(400).json({ error: 'Automation not found' });
     return res.status(200).json({ automation: result[0] });
   });
 }
