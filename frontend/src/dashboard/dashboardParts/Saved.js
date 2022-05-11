@@ -67,11 +67,11 @@ export default function Saved()
         //   }
         >
         {/* <Container> */}
-          <Flex alignItems={"center"}><FiBookmark style={{"margin" : "0 0 0 5px", "font-size" : "30px"}}/><Text ml= "2"fontSize={30} fontWeight="600" color={'black'}>Saved Wallets </Text></Flex>
+          <Flex alignItems={"center"}><FiBookmark style={{"margin" : "0 0 0 5px", "fontSize" : "30px"}}/><Text ml= "2"fontSize={30} fontWeight="600" color={'black'}>Saved Wallets </Text></Flex>
             <Box         overflowY={"auto"}>
             {accounts.map((data, i) => {
                 return (
-                    <Flex justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5" pl="5">
+                    <Flex  key={"applet"+i} justify={"space-between"} alignItems='center' mt={5} mb={5} pr="5" pl="5">
                         <Text fontWeight={600} color={'gray.500'} >
                             <Link to={"/dashboard/search/"+data.save_addr}>
                             {data.save_addr}

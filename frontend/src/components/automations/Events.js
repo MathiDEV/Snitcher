@@ -13,8 +13,8 @@ export default function EventsMenu({ events, onChange }) {
             EVENT
         </MenuButton>
         <MenuList>
-            {events.map((event) => {
-                return (<MenuItem onClick={() => { onChange(event.enum) }} icon={event.icon} command={event.command}>
+            {events.map((event, i) => {
+                return (<MenuItem key={"event"+i} onClick={() => { onChange(event.enum) }} icon={event.icon} command={event.command}>
                     {event.name}
                 </MenuItem>)
             })}
