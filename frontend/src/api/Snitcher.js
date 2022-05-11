@@ -1,4 +1,4 @@
-const apiEndpoint = "https://api.snitcher.socialeo.net/api"
+const apiEndpoint = "http://localhost:3000/api"
 
 const snitcherAPI = {
     sendSignature: function (address, signature) {
@@ -84,7 +84,7 @@ const snitcherAPI = {
             }).then(data => data.json())
     },
     createAutomation: function (automation) {
-        return fetch(`${apiEndpoint}/user/automations/create`, {
+        return fetch(`${apiEndpoint}/automations/create`, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("accessToken"),
                 'Content-Type': 'application/json'

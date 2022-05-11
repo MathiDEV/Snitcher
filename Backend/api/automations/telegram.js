@@ -18,12 +18,15 @@ const sendMessage = (chatId, from, to, amount, currency) => {
     });
 }
 
-const create_telegram_json = (title, chatId, user_id) => {
+const create_telegram_json = (title, chatId, user_id, blocks, address, event) => {
     return json.create_webhook_json(
         title,
         "telegram",
         {
             chatId: chatId,
+            blocks: blocks,
+            address: address,
+            event: event,
         },
         user_id
     );

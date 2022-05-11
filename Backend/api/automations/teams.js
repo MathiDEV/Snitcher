@@ -160,12 +160,15 @@ const sendMessage = (url, from, to, amount, currency) => {
     })();
 }
 
-const create_teams_json = (title, url, user_id) => {
+const create_teams_json = (title, url, user_id, blocks, address, event) => {
     return json.create_webhook_json(
         title,
         "teams",
         {
             url: url,
+            blocks: blocks,
+            address: address,
+            event: event,
         },
         user_id
     );

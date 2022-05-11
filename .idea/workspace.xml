@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="099c78af-8783-44e3-8347-8711c125617d" name="Changes" comment="[FIX] 404">
+      <change beforePath="$PROJECT_DIR$/Backend/api/automations/discord.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/api/automations/discord.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/api/automations/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/api/automations/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/api/automations/teams.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/api/automations/teams.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/api/automations/telegram.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/api/automations/telegram.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/api/automations/twilio.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/api/automations/twilio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/api/starton/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/api/starton/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/Snitcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/Snitcher.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="28pQBHOOClwsdhfpxhJlz1ea6oz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/thomasmazaud/WebstormProjects/HackatonStarton/Backend&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Backend" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Backend/api/user" />
+      <recent name="$PROJECT_DIR$/Backend/api/login" />
+      <recent name="$PROJECT_DIR$/Backend" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="099c78af-8783-44e3-8347-8711c125617d" name="Changes" comment="" />
+      <created>1651910909521</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651910909521</updated>
+      <workItem from="1651910910701" duration="23321000" />
+      <workItem from="1651950343993" duration="15264000" />
+      <workItem from="1651971392359" duration="35273000" />
+      <workItem from="1652183765976" duration="6531000" />
+    </task>
+    <task id="LOCAL-00001" summary="[ADD] Base of repo">
+      <created>1651913177377</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1651913177377</updated>
+    </task>
+    <task id="LOCAL-00002" summary="[ADD] Nonce">
+      <created>1651924726660</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1651924726660</updated>
+    </task>
+    <task id="LOCAL-00003" summary="[ADD] Middleware auth + auth system + change username">
+      <created>1651931619704</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1651931619704</updated>
+    </task>
+    <task id="LOCAL-00004" summary="[ADD] Many various things">
+      <created>1651953339730</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1651953339731</updated>
+    </task>
+    <task id="LOCAL-00005" summary="[FIX] Fix login">
+      <created>1651953934604</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1651953934604</updated>
+    </task>
+    <task id="LOCAL-00006" summary="[FIX] Add Twilio automation">
+      <created>1651958081935</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1651958081936</updated>
+    </task>
+    <task id="LOCAL-00007" summary="[FIX] Fix JWT + add best users + save later">
+      <created>1651967636713</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1651967636713</updated>
+    </task>
+    <task id="LOCAL-00008" summary="[FIX] Add integrations">
+      <created>1651976885853</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1651976885853</updated>
+    </task>
+    <task id="LOCAL-00009" summary="[FIX] Adam's destroyed code">
+      <created>1651977262725</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1651977262725</updated>
+    </task>
+    <task id="LOCAL-00010" summary="[FIX] Some fixes + Telegram json">
+      <created>1651979827923</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1651979827923</updated>
+    </task>
+    <task id="LOCAL-00011" summary="[ADD] Webhook implementation">
+      <created>1651990576219</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1651990576219</updated>
+    </task>
+    <task id="LOCAL-00012" summary="[ADD] Fix">
+      <created>1651998094831</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1651998094831</updated>
+    </task>
+    <task id="LOCAL-00013" summary="[ADD] Finished backend">
+      <created>1652009000764</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1652009000764</updated>
+    </task>
+    <task id="LOCAL-00014" summary="[FIX] Routes">
+      <created>1652013973905</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1652013973905</updated>
+    </task>
+    <task id="LOCAL-00015" summary="[ADD] Delete watcher">
+      <created>1652016417172</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1652016417172</updated>
+    </task>
+    <task id="LOCAL-00016" summary="[ADD] Env">
+      <created>1652017342564</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1652017342564</updated>
+    </task>
+    <task id="LOCAL-00017" summary="[FIX] SQL Schema">
+      <created>1652017485182</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1652017485182</updated>
+    </task>
+    <task id="LOCAL-00018" summary="[FIX] 404">
+      <created>1652018786442</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1652018786442</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[ADD] Base of repo" />
+    <MESSAGE value="[ADD] Nonce" />
+    <MESSAGE value="[ADD] Middleware auth + auth system + change username" />
+    <MESSAGE value="[ADD] Many various things" />
+    <MESSAGE value="[FIX] Fix login" />
+    <MESSAGE value="[FIX] Add Twilio automation" />
+    <MESSAGE value="[FIX] Fix JWT + add best users + save later" />
+    <MESSAGE value="[FIX] Add integrations" />
+    <MESSAGE value="[FIX] Adam's destroyed code" />
+    <MESSAGE value="[FIX] Some fixes + Telegram json" />
+    <MESSAGE value="[ADD] Webhook implementation" />
+    <MESSAGE value="[ADD] Fix" />
+    <MESSAGE value="[ADD] Finished backend" />
+    <MESSAGE value="[FIX] Routes" />
+    <MESSAGE value="[ADD] Delete watcher" />
+    <MESSAGE value="[ADD] Env" />
+    <MESSAGE value="[FIX] SQL Schema" />
+    <MESSAGE value="[FIX] 404" />
+    <option name="LAST_COMMIT_MESSAGE" value="[FIX] 404" />
+  </component>
+</project>

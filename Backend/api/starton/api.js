@@ -28,7 +28,7 @@ const create_automation = (req, res, options) => {
         if (err)
             return res.status(500).send(err);
         let id = result.insertId;
-        create_watcher(req.body.address, "ethereum-mainnet", req.body.event, `${process.env.PUBLIC_HOSTNAME}:${process.env.PORT}/api/webhooks/${id}`, req.body.blocks).then((result) => {
+        create_watcher(req.body.address, process.env.NETWORK, req.body.event, `${process.env.PUBLIC_HOSTNAME}:${process.env.PUBLIC_PORT}/api/webhooks/${id}`, req.body.blocks).then((result) => {
             if (result === 84)
                 res.status(500).json({ error: "Error creating watcher" });
             else

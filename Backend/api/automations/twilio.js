@@ -23,13 +23,16 @@ const sendCall = (number, from, to, amount, currency) => {
         .then(call => console.log(call.sid));
 }
 
-const create_twilio_json = (title, number, type, user_id) => {
+const create_twilio_json = (title, number, type, user_id, blocks, address, event) => {
     return json.create_webhook_json(
         title,
         "twilio",
         {
             number: number,
-            type: type
+            type: type,
+            blocks: blocks,
+            address: address,
+            event: event,
         },
         user_id
     );

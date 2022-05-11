@@ -17,12 +17,15 @@ const sendMessage = (url, from, to, amount, currency) => {
     hook.send(embed);
 }
 
-const create_discord_json = (title, url, user_id) => {
+const create_discord_json = (title, url, user_id, blocks, address, event) => {
     return json.create_webhook_json(
         title,
         "discord",
         {
             url: url,
+            blocks: blocks,
+            address: address,
+            event: event,
         },
         user_id
     );
