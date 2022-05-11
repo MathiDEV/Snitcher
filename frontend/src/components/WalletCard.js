@@ -3,8 +3,8 @@ import { Box, Avatar, Text, Stack, Badge, Button, Flex, Td, Thead, Table, TableC
 import { FiBookmark, FiCpu } from 'react-icons/fi'
 import { FaEthereum } from 'react-icons/fa'
 import WalletLogo from '../assets/wallet.png'
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Snitcher from '../api/Snitcher'
 
 export default function Logo({ data }) {
     const navigate = useNavigate();
@@ -14,9 +14,7 @@ export default function Logo({ data }) {
     }
     const [accounts, setAccounts] = useState([])
     useEffect(() => {
-        fetch("https://api.snitcher.socialeo.net/api/user/getAllSave", {
-            headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") },
-        }).then((resp) => resp.json())
+        Snitcher.getAllSaved()
             .then((data) => setAccounts(data.success)).then((e) => localStorage.setItem("savedAddress", JSON.stringify(accounts)));
     }, [])
     if (accounts) localStorage.setItem("savedAddress", JSON.stringify(accounts));
@@ -25,7 +23,6 @@ export default function Logo({ data }) {
         let array = JSON.parse(localStorage.getItem("savedAddress"));
         if (!array) return 0
         for (let value of array) {
-            console.log(value.save_addr)
             if (address === value.save_addr) {
                 return 1;
             }
@@ -34,30 +31,20 @@ export default function Logo({ data }) {
     }
 
     function addOrRemove(address) {
-        fetch("https://api.snitcher.socialeo.net/api/user/saveLater",
-            {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("accessToken"),
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ "toSave": address }),
-                method: "POST"
-            }).then((resp) => resp.json()).then((data) => {
+        Snitcher.saveToggle(address)
+            .then((data) => {
                 if (data.success.split(' ')[1] == "removed") {
                     for (let i = 0; i < accounts.length; i++) {
                         if (accounts[i].save_addr === address) {
                             let array = accounts;
                             array.splice(i, 1);
-                            console.log(array)
                             setAccounts(array);
                             localStorage.setItem("savedAddress", JSON.stringify(accounts));
                             return;
                         }
                     }
                 } else {
-                    fetch("https://api.snitcher.socialeo.net/api/user/getAllSave", {
-                        headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") },
-                    }).then((resp) => resp.json())
+                    Snitcher.getAllSaved()
                         .then((data) => setAccounts(data.success)).then((e) => localStorage.setItem("savedAddress", JSON.stringify(accounts)));
                 }
             })
@@ -106,18 +93,18 @@ export default function Logo({ data }) {
                     </Thead>
                     <Tbody>
                         <Tr>
-                            <Td>Hex</Td>
-                            <Td>{data.balance.hex}</Td>
+                            <Td key="type">Hex</Td>
+                            <Td key="value">{data.balance.hex}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Formatted</Td>
-                            <Td>{data.balance.formatted} {data.currencySymbol}</Td>
+                            <Td key="type">Formatted</Td>
+                            <Td key="value">{data.balance.formatted} {data.currencySymbol}</Td>
                         </Tr>
                         {(estimation == undefined)
                             ? (<></>)
                             : (<Tr>
-                                <Td>Estimated</Td>
-                                <Td>${estimation}</Td>
+                                <Td key="type">Estimated</Td>
+                                <Td key="value">${estimation}</Td>
                             </Tr>)
                         }
                     </Tbody>
@@ -140,7 +127,7 @@ export default function Logo({ data }) {
                     _focus={{
                         bg: 'gray.200',
                     }}
-                    onClick={() => { addOrRemove(data.address); setAccounts([])}}>
+                    onClick={() => { addOrRemove(data.address); setAccounts([]) }}>
                     <FiBookmark style={{ "marginRight": 5 }} />
                     {check(data.address) ? "Delete from saved" : "Save for later"
                     }

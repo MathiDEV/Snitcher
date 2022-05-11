@@ -18,6 +18,7 @@ import { useState, useEffect } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import { FiEdit2 } from 'react-icons/fi';
 import { FiCpu } from 'react-icons/fi';
+import Snicher from '../../api/Snitcher';
 
 
 
@@ -37,9 +38,7 @@ export default function Applets() {
 
 
     useEffect(() => {
-        fetch("https://api.snitcher.socialeo.net/api/user/automations", {
-            headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") },
-        }).then((resp) => resp.json())
+        Snicher.getAutomations()
             .then((data) => setAccounts(data.automations));
     }, [])
     return (

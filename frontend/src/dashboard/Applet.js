@@ -5,6 +5,7 @@ import EventsMenu from '../components/automations/Events'
 import ActionsMenu from '../components/automations/Actions'
 import { FiActivity, FiDownload, FiUpload, FiLogOut, FiLogIn, FiCheck, FiArrowRight, FiShuffle, FiCpu } from "react-icons/fi"
 import { SiDiscord, SiMicrosoftteams, SiTelegram } from 'react-icons/si'
+import Snitcher from '../api/Snitcher'
 
 function getEvent(event) {
     for (let ev of allEvents)
@@ -72,20 +73,36 @@ const allEvents = [
     }
 ]
 
-
-
-
-
 function Applet(params) {
+    const type = (params.data ? params.data.startsWith('0x') ? 'wallet' : 'applet' : 'new')
     const [event, setEvent] = useState(undefined)
+    const [usable, setUsable] = useState(true)
     const [confirmation, setConfirmation] = useState(undefined)
-    const [wallet, setWallet] = useState(params.data)
+    const [wallet, setWallet] = useState(type == 'wallet' ? params.data : undefined)
     const [action, setAction] = useState(undefined)
     const [title, setTitle] = useState(undefined)
     const [actionForm, setActionForm] = useState({})
     const validationError = (confirmation && (confirmation < 1 || confirmation > 128 || parseFloat(confirmation) != parseInt(confirmation)))
     const walletError = (wallet && !wallet.match(/^0x[0-9a-fA-F]{40}$/))
     const titleError = title && !title.match(/^[\w ]+$/)
+    const toast = useToast()
+
+    if (type === 'applet' && usable) {
+        Snitcher.getAutomation(params.data)
+            .then(data => {
+                setTitle(data.title)
+            }).catch(err => {
+                toast({
+                    title: 'Error',
+                    description: 'Could not fetch applet data',
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true
+                })
+                setUsable(false)
+            })
+    }
+
     const allActions = [
         {
             "enum": "DISCORD",
@@ -269,9 +286,9 @@ function Applet(params) {
     }
 
     const actionError = action && getAction(action) && getAction(action).check(actionForm)
-    const toast = useToast()
+
     return (
-        <Box w='100%' mt={5}>
+        <Box opacity={usable ? 1 : 0.5} pointerEvents={usable ? 'auto' : 'none'} w='100%' mt={5}>
             <FormControl display={'block'} m={'auto'} w='100%' maxW={'500px'} isInvalid={titleError}>
                 <InputGroup mt={3}>
                     <Input placeholder='My applet name' type="text" value={title} onChange={(event) => {

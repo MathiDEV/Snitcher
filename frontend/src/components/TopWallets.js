@@ -1,22 +1,27 @@
 import React from "react";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { ScaleLoader } from "react-spinners";
 import WalletCard from '../components/WalletCard'
+import Snitcher from '../api/Snitcher'
 
 export default function TopWallets(props) {
     const [wallets, setWallets] = useState(undefined);
-
+    const toast = useToast();
     if (wallets === undefined) {
-        fetch("https://api.snitcher.socialeo.net/api/user/bestusers", { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") } }).then(data => {
-            data.json().then(data => {
-                setWallets(data);
-            }).catch(err => {
-                setWallets(null);
-            });
+        Snitcher.getTopWallets()
+        .then(data => {
+            setWallets(data);
         }).catch(err => {
+            toast({
+                title: "Error",
+                description: "Failed to get wallets",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            })
             setWallets(null);
-        });
+        })
     }
     return (
         <>

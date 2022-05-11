@@ -3,9 +3,7 @@ import React from "react";
 import { Link, Box, Flex, Text, Button, Stack, useToast } from "@chakra-ui/react";
 import Logo from "./Logo";
 import Web3 from "web3";
-import { useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
-import { IoLogoWindows } from "react-icons/io5";
+import Snitcher from "../api/Snitcher";
 
 const NavBar = ({ background }) => {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -67,14 +65,9 @@ const NavBar = ({ background }) => {
             }
         }
 
-        const handleAuthenticate = ({ address, signature }) =>
-            fetch(`https://api.snitcher.socialeo.net/api/auth`, {
-                body: JSON.stringify({ address, signature }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                method: 'POST',
-            }).then((response) => response.json());
+        const handleAuthenticate = ({ address, signature }) => {
+            return Snitcher.sendSignature(address, signature)
+        }
 
         const IsInstalled = async () => {
 
@@ -122,26 +115,25 @@ const NavBar = ({ background }) => {
                 }
 
                 const publicAddress = coinbase.toLowerCase();
-                fetch(
-                    "https://api.snitcher.socialeo.net/api/user", {
-                    body: JSON.stringify({ "address": publicAddress }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    method: 'POST',
-                }
-                )
-                    .then((response) => response.json())
+                Snitcher.getUser(publicAddress)
                     .then((users) =>
                         users
                     )
                     .then(handleSignMessage)
                     .then(handleAuthenticate)
                     .then((resp) => {
+                        console.log(resp);
                         localStorage.setItem("accessToken", resp.token);
                         window.location.reload()
                     })
                     .catch((err) => {
+                        toast({
+                            title: 'Error',
+                            description: 'Failed to comunicate with auth server.',
+                            status: 'error',
+                            duration: 5000,
+                            isClosable: true,
+                        });
                         web3 = undefined;
                     });
             }

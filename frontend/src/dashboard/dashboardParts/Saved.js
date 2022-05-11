@@ -26,6 +26,7 @@ import { FiCpu } from 'react-icons/fi';
 import { FiBookmark } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Snitcher from '../../api/Snitcher';
 
 const testAccounts = ["0x00000000219ab540356cbb839cbe05303d7705fa","0x00000000219ab540356cbb839cbe05303d7705fa","0x00000000219ab540356cbb839cbe05303d7705fa","0x00000000219ab540356cbb839cbe05303d7705fa","0x00000000219ab540356cbb839cbe05303d7705fa","0x00000000219ab540356cbb839cbe05303d7705fa","0x00000000219ab540356cbb839cbe05303d7705fa","0x00000000219ab540356cbb839cbe05303d7705fa","0x00000000219ab540356cbb839cbe05303d7705fa"]
 export default function Saved()
@@ -34,21 +35,14 @@ export default function Saved()
     const [accounts, setAccounts] = useState([]);
 
     useEffect(() => {
-        fetch ("https://api.snitcher.socialeo.net/api/user/getAllSave",{
-            headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken")},
-        }).then((resp)=>resp.json())
-        .then((data) => setAccounts(data.success)).then((e) => localStorage.setItem("savedAddress", JSON.stringify(accounts)));
+        Snitcher.getAllSaved()
+        .then((data) => setAccounts(data.success))
+        .then((e) => localStorage.setItem("savedAddress", JSON.stringify(accounts)));
     }, [])
     if (accounts) localStorage.setItem("savedAddress", JSON.stringify(accounts));
 
     function DeleteSaved(address, i){
-            fetch("https://api.snitcher.socialeo.net/api/user/saveLater",
-            {
-                headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken"),
-                        'Content-Type': 'application/json' },
-                body: JSON.stringify({"toSave" : address}),
-                method: "POST"
-            }).then((resp)=>(console.log(resp)))
+        Snitcher.saveToggle(address)
         let array = accounts;
         array.splice(i, 1);
         setAccounts(array);
