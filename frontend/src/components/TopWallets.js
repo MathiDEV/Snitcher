@@ -30,7 +30,7 @@ export default function TopWallets(props) {
                 {(wallets === undefined) ? <ScaleLoader color="#54a0ff" /> :
                     (wallets === null) ? <h1>No wallets found :(</h1> :
                         wallets.map((wallet, i) => {
-                            return (<WalletCard key={"wallet"+i}data={wallet} />)
+                            return (<WalletCard key={"wallet"+i} data={wallet} />)
                         })
                 }
             </Flex>
