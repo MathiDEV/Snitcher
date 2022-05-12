@@ -1,4 +1,4 @@
-const apiEndpoint = "http://localhost:3000/api"
+const apiEndpoint = "http://MacBook-Pro-de-Thomas-2.local:3000/api"
 
 const snitcherAPI = {
     sendSignature: function (address, signature) {

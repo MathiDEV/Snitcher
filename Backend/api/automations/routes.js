@@ -25,22 +25,22 @@ router.post('/create', auth, (req, res) => {
             return res.status(403).send("Invalid action");
         if (!req.body.title || !req.body.number)
             return res.status(403).send("Missing parameters");
-        options = twilio.create_twilio_json(req.body.title, req.body.number, req.body.action, req.id, req.body.blocks, req.body.address, req.body.event);
+        options = twilio.create_twilio_json(req.body.title, req.body.number, req.body.action, req.id, req.body.blocks, req.body.address, req.body.event, req.body.minEth, req.body.maxEth, req.body.minPctEth, req.body.maxPctEth);
     }
     if (req.body.type === "discord") {
         if (!req.body.title || !req.body.url)
             return res.status(403).send("Missing parameters");
-        options = discord.create_discord_json(req.body.title, req.body.url, req.id, req.body.blocks, req.body.address, req.body.event);
+        options = discord.create_discord_json(req.body.title, req.body.url, req.id, req.body.blocks, req.body.address, req.body.event, req.body.minEth, req.body.maxEth, req.body.minPctEth, req.body.maxPctEth);
     }
     if (req.body.type === "telegram") {
         if (!req.body.chatId || !req.body.title)
             return res.status(403).send("Missing parameters");
-        options = telegram.create_telegram_json(req.body.title, req.body.chatId, req.id, req.body.blocks, req.body.address, req.body.event);
+        options = telegram.create_telegram_json(req.body.title, req.body.chatId, req.id, req.body.blocks, req.body.address, req.body.event, req.body.minEth, req.body.maxEth, req.body.minPctEth, req.body.maxPctEth);
     }
     if (req.body.type === "teams") {
         if (!req.body.title || !req.body.url)
             return res.status(403).send("Missing parameters");
-        options = teams.create_teams_json(req.body.title, req.body.url, req.id, req.body.blocks, req.body.address, req.body.event);
+        options = teams.create_teams_json(req.body.title, req.body.url, req.id, req.body.blocks, req.body.address, req.body.event, req.body.minEth, req.body.maxEth, req.body.minPctEth, req.body.maxPctEth);
     }
 
     starton.create_automation(req, res, options);

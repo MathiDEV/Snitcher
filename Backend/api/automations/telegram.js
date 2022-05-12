@@ -18,7 +18,7 @@ const sendMessage = (chatId, from, to, amount, currency) => {
     });
 }
 
-const create_telegram_json = (title, chatId, user_id, blocks, address, event) => {
+const create_telegram_json = (title, chatId, user_id, blocks, address, event, minEth, maxEth, minPctEth, maxPctEth) => {
     return json.create_webhook_json(
         title,
         "telegram",
@@ -27,6 +27,10 @@ const create_telegram_json = (title, chatId, user_id, blocks, address, event) =>
             blocks: blocks,
             address: address,
             event: event,
+            minEth: minEth,
+            maxEth: maxEth,
+            minPctEth: minPctEth,
+            maxPctEth: maxPctEth
         },
         user_id
     );
