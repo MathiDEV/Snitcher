@@ -4,6 +4,8 @@
 
 # Snitcher
 
+**🥈 This project was carried out as part of a Hackathon organized by Starton in partnership with BNB Chain and won second place nationally**
+
 > ❗️ Website demo : https://snitcher.socialeo.net
 
 ## Problem
