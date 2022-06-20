@@ -6,8 +6,6 @@
 
 **🥈 This project was carried out as part of a Hackathon organized by Starton in partnership with BNB Chain and won second place nationally**
 
-> ❗️ Website demo : https://snitcher.socialeo.net
-
 ## Problem
 
 Our project makes information **easy to obtain**, and will keep blockchain users updated on everything based on what they are searching for. It'll be easier for beginner and more experienced users to make decisions by following **successfull investissors** they have interests in.
@@ -44,7 +42,3 @@ Our name is **Snitcher**, because our application will watch for everything happ
 We learned how to use React and Express _(we mastered PhP better, but we wanted to add a little challenge)_, and we took a lot of time to understand how MetaMask and the web3 works, at the end of these two days we now have knowloedge on all of these things!
 
 ❤️ I repeat it but we are very proud to have been able to work on a project around the Starton API which perfectly met the needs of our application, whether for the search for wallets or for the automation of tasks!
-
-## Delivery
-
-- [Website](https://snitcher.socialeo.net)
