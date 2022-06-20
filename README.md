@@ -23,7 +23,7 @@ The simplicity of the **Starton API** integration has undoubtedly saved us preci
 
 An automation project like this communicates with many APIs, some paid (at our expense 😄).
 
-However, it is impossible for us to push the list of these keys to this GitHub directory. On the other hand, **we hosted the site online:** [Snitcher](https://snitcher.socialeo.net).
+However, it is impossible for us to push the list of these keys to this GitHub directory.
 
 If despite everything you want to try this project on your side :
 
